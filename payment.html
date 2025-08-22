@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento</title>
+  <style>
+
+    
+    /* Ajustes extras só para a página de pagamento */
+    body {
+      background-color: #0f0f1a;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+    }
+
+    .payment-section {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #1a1a2e;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .payment-section h2 {
+      margin-bottom: 1rem;
+      color: #e94560;
+    }
+
+    #paymentSummary {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    #paymentSummary li {
+      padding: 6px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    #paymentTotal {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 1rem 0;
+    }
+
+    .payment-section button {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      transition: background 0.3s;
+    }
+
+    .payment-section button:hover {
+      background: #c73a50;
+    }
+
+    #qrContainer {
+      margin-top: 1rem;
+    }
+
+    #qrContainer canvas {
+      margin: 0 auto;
+      display: block;
+    }
+
+    .pix-info {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="text-align:center;">Loja Virtual</h1>
+  </header>
+
+  <!-- SEÇÃO DE PAGAMENTO -->
+  <section class="payment-section">
+    <h2>Resumo do Pedido</h2>
+    <ul id="paymentSummary"></ul>
+
+    <span id="paymentTotal">R$ 0,00</span>
+
+    <button onclick="finalizarPagamento()">Pagar Agora</button>
+
+    <!-- Contêiner do QR Code -->
+    <div id="qrContainer"></div>
+    <p class="pix-info">Escaneie para pagar via Pix</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

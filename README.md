@@ -1,49 +1,43 @@
-🎮 GameZone Store - E-commerce de Jogos
-📌 Escopo
-O GameZone Store é um projeto de e-commerce focado em venda de jogos digitais.
-O site contará com catálogo de jogos, integração com APIs, dashboard de dados e acessibilidade.
-O objetivo é aplicar práticas modernas de desenvolvimento web: responsividade, acessibilidade, versionamento, testes e integração com APIs.
+Escopo do Projeto
 
-🎯 Justificativa
-Este projeto foi criado como parte da disciplina de Desenvolvimento Web, para consolidar o aprendizado de:
+Funcionalidades Principais:
 
-Uso de frameworks CSS.
-Integração com APIs reais.
-Implementação de testes automatizados.
-Boas práticas de acessibilidade.
-Versionamento organizado em GitHub.
-🛠️ Tecnologias
-HTML5 e CSS3
-Bootstrap (framework CSS)
-JavaScript (ES6+)
-Chart.js (gráficos e dashboards)
-APIs utilizadas:
-Fake Store API → catálogo de jogos.
-QR Code API (goqr.me) → geração de QR Code para finalizar compra.
-Ferramentas de teste:
-Jest
-Cypress
-Controle de versão:
-Git + GitHub
-📱 Layout (mínimo de 3 telas/seções)
-Página inicial (Home/Dashboard):
-Catálogo de jogos (via API).
-Gráficos com Chart.js mostrando dados de vendas.
-Carrinho de compras.
-Finalização de Compra (API QR Code):
-Geração de QR Code com o valor total do carrinho.
-Simulação de pagamento.
-Página de Acessibilidade/Ajuda:
-Explicações de navegação por teclado.
-Opção de aumentar fonte e mudar contraste.
-Formulário de contato.
-📐 Protótipo (Wireframe)
-O protótipo inicial foi criado para guiar o design das páginas.
-📂 O arquivo do wireframe está disponível em /docs/wireframe.
+Catálogo de Jogos: Exibição dos jogos com imagens, descrições e categorias.
 
-📌 Versionamento
-Branch principal: main
-Branch de desenvolvimento: develop
-Branch de protótipo: feature/prototipo
-Tag inicial: v0.1
-👨‍💻 Autores: Felipe Zamora e João Cappeletti 📅 Data de início: 21/08/2025
+Filtros: O usuário poderá filtrar os jogos por tipo, como Ação, Aventura, RPG, Estratégia, etc.
+
+Busca de Jogos: O usuário poderá buscar por jogos através de uma barra de pesquisa.
+
+Carrinho de Compras: Funcionalidade que permite ao usuário adicionar jogos ao carrinho e visualizar o total da compra.
+
+Pagamento: Integração com QR Code para o pagamento. Ao final do processo de compra, será gerado um QR Code com os dados da transação.
+
+Integração com APIs: Uso da API RAWG.io para obter dados sobre os jogos e QR Code API para gerar o código de pagamento.
+
+Tecnologias Utilizadas:
+
+Frontend:
+
+HTML5, CSS3, JavaScript
+
+Framework Tailwind CSS para estilização
+
+Font Awesome para ícones
+
+Backend:
+
+API RAWG.io para fornecer informações sobre jogos
+
+API de QR Code para gerar o código de pagamento
+
+Outras ferramentas:
+
+GitHub para controle de versão e repositório
+
+Objetivos:
+
+Criar um site funcional que permita aos usuários buscar, filtrar, comprar e pagar por jogos online.
+
+Utilizar APIs externas para enriquecer a experiência do usuário (RAWG.io para jogos e API de QR Code para pagamento).
+
+Aplicar boas práticas de desenvolvimento, como o uso de Git e GitHub para controle de versão.

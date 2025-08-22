@@ -4,101 +4,121 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagamento</title>
+
   <style>
+    /* Estilos específicos para a página de pagamento */
 
-    
-    /* Ajustes extras só para a página de pagamento */
+    /* Estilo do corpo da página */
     body {
-      background-color: #0f0f1a;
-      color: #e0e0e0;
-      font-family: Arial, sans-serif;
+      background-color: #0f0f1a; /* Fundo escuro */
+      color: #e0e0e0; /* Texto claro */
+      font-family: Arial, sans-serif; /* Fonte básica */
     }
 
+    /* Container principal da seção de pagamento */
     .payment-section {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #1a1a2e;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      text-align: center;
+      max-width: 600px; /* Largura máxima */
+      margin: 2rem auto; /* Centralizado com margem superior/inferior */
+      padding: 2rem; /* Espaçamento interno */
+      background: #1a1a2e; /* Fundo do container */
+      border-radius: 12px; /* Cantos arredondados */
+      box-shadow: 0 0 15px rgba(0,0,0,0.5); /* Sombra para destaque */
+      text-align: center; /* Texto centralizado */
     }
 
+    /* Estilo do título da seção */
     .payment-section h2 {
-      margin-bottom: 1rem;
-      color: #e94560;
+      margin-bottom: 1rem; /* Espaço abaixo */
+      color: #e94560; /* Cor rosa/vermelha */
     }
 
+    /* Lista de resumo dos itens do pedido */
     #paymentSummary {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 1rem;
-      text-align: left;
+      list-style: none; /* Remove marcadores da lista */
+      padding: 0; /* Remove padding padrão */
+      margin-bottom: 1rem; /* Espaço abaixo da lista */
+      text-align: left; /* Alinha texto à esquerda */
     }
 
+    /* Itens individuais da lista de resumo */
     #paymentSummary li {
-      padding: 6px 0;
-      border-bottom: 1px solid #333;
+      padding: 6px 0; /* Espaçamento vertical */
+      border-bottom: 1px solid #333; /* Linha separadora entre itens */
     }
 
+    /* Total do pagamento */
     #paymentTotal {
-      display: block;
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin: 1rem 0;
+      display: block; /* Exibe como bloco */
+      font-size: 1.3rem; /* Tamanho maior da fonte */
+      font-weight: bold; /* Negrito */
+      margin: 1rem 0; /* Margem acima e abaixo */
     }
 
+    /* Estilo do botão de pagamento */
     .payment-section button {
-      background: #e94560;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      transition: background 0.3s;
+      background: #e94560; /* Cor de fundo rosa/vermelha */
+      color: white; /* Texto branco */
+      border: none; /* Sem borda */
+      padding: 12px 24px; /* Espaçamento interno */
+      border-radius: 8px; /* Cantos arredondados */
+      cursor: pointer; /* Cursor de mãozinha */
+      font-size: 1rem; /* Tamanho da fonte */
+      margin-bottom: 1rem; /* Espaço abaixo */
+      transition: background 0.3s; /* Transição suave na cor de fundo */
     }
 
+    /* Efeito hover do botão */
     .payment-section button:hover {
-      background: #c73a50;
+      background: #c73a50; /* Cor de fundo mais escura ao passar o mouse */
     }
 
+    /* Container do QR Code */
     #qrContainer {
-      margin-top: 1rem;
+      margin-top: 1rem; /* Espaço acima */
     }
 
+    /* Estilização do canvas onde o QR Code será renderizado */
     #qrContainer canvas {
-      margin: 0 auto;
-      display: block;
+      margin: 0 auto; /* Centraliza horizontalmente */
+      display: block; /* Exibe como bloco */
     }
 
+    /* Informação auxiliar sobre Pix */
     .pix-info {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      color: #aaa;
+      margin-top: 0.5rem; /* Espaço acima */
+      font-size: 0.9rem; /* Fonte menor */
+      color: #aaa; /* Cor cinza clara */
     }
   </style>
 </head>
 <body>
   <header>
+    <!-- Título da página -->
     <h1 style="text-align:center;">Loja Virtual</h1>
   </header>
 
   <!-- SEÇÃO DE PAGAMENTO -->
   <section class="payment-section">
+    <!-- Título do resumo do pedido -->
     <h2>Resumo do Pedido</h2>
+
+    <!-- Lista onde os itens comprados serão exibidos dinamicamente -->
     <ul id="paymentSummary"></ul>
 
+    <!-- Total da compra -->
     <span id="paymentTotal">R$ 0,00</span>
 
+    <!-- Botão para finalizar o pagamento -->
     <button onclick="finalizarPagamento()">Pagar Agora</button>
 
-    <!-- Contêiner do QR Code -->
+    <!-- Contêiner onde o QR Code será gerado -->
     <div id="qrContainer"></div>
+
+    <!-- Texto informativo sobre o uso do Pix -->
     <p class="pix-info">Escaneie para pagar via Pix</p>
   </section>
 
+  <!-- Script JavaScript que controla a lógica da página -->
   <script src="script.js"></script>
 </body>
 </html>

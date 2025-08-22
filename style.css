@@ -1,239 +1,380 @@
-/* styles.css */
-
-/* Custom styles for specific elements not easily handled by Tailwind or for overrides */
+/* Estilos personalizados para elementos que não são facilmente manipulados pelo Tailwind ou para sobrescrever estilos existentes */
 body {
+    /* Define a fonte do corpo do documento */
     font-family: "Inter", sans-serif;
-    background-color: #1a1a2e; /* Dark background color from wireframe */
-    color: #e0e0e0; /* Light text color */
+    /* Cor de fundo escura do wireframe */
+    background-color: #1a1a2e;
+    /* Cor do texto clara */
+    color: #e0e0e0;
 }
+/* Classe para esconder seções da página */
 .section-hidden {
     display: none;
 }
+/* Estilos para a barra de navegação personalizada */
 .navbar-custom {
-    background-color: #16213e; /* Darker blue for navbar */
+    /* Cor de fundo azul mais escura */
+    background-color: #16213e;
 }
+/* Estilos para o contador de itens do carrinho (badge) */
 .cart-badge {
+    /* Posiciona o badge de forma absoluta em relação ao seu contêiner */
     position: absolute;
+    /* Ajusta a posição no canto superior direito */
     top: -5px;
     right: -5px;
-    background-color: #e94560; /* Accent color for badge */
+    /* Cor de destaque para o badge */
+    background-color: #e94560;
+    /* Cor do texto branca */
     color: white;
+    /* Borda circular para o badge */
     border-radius: 50%;
+    /* Preenchimento interno */
     padding: 2px 7px;
+    /* Tamanho da fonte menor */
     font-size: 0.75rem;
 }
+/* Contêiner para a barra de pesquisa */
 .search-container {
+    /* Posicionamento relativo para aninhar o ícone */
     position: relative;
+    /* Largura máxima e 100% de largura */
     max-width: 500px;
     width: 100%;
 }
+/* Estilos para o campo de entrada de pesquisa */
 .search-input {
-    padding-left: 2.5rem; /* Space for the search icon */
-    background-color: #0f3460; /* Dark blue for search input */
+    /* Preenchimento à esquerda para o ícone de pesquisa */
+    padding-left: 2.5rem;
+    /* Cor de fundo azul escura */
+    background-color: #0f3460;
+    /* Borda sólida na cor do fundo */
     border: 1px solid #1a1a2e;
+    /* Cor do texto clara */
     color: #e0e0e0;
+    /* Borda arredondada */
     border-radius: 0.5rem;
 }
+/* Estilos para o ícone de pesquisa */
 .search-icon {
+    /* Posicionamento absoluto para o ícone */
     position: absolute;
+    /* Posição à esquerda */
     left: 0.75rem;
+    /* Alinha verticalmente ao centro */
     top: 50%;
     transform: translateY(-50%);
+    /* Cor do ícone */
     color: #e0e0e0;
 }
+/* Estilos para a barra lateral de filtros */
 .filter-sidebar {
-    background-color: #16213e; /* Darker blue for sidebar */
+    /* Cor de fundo azul mais escura */
+    background-color: #16213e;
+    /* Preenchimento interno */
     padding: 1.5rem;
+    /* Borda arredondada */
     border-radius: 0.75rem;
 }
+/* Título dos filtros */
 .filter-title {
+    /* Tamanho e peso da fonte */
     font-size: 1.25rem;
     font-weight: bold;
-    color: #e94560; /* Accent color for title */
+    /* Cor de destaque */
+    color: #e94560;
+    /* Margem inferior */
     margin-bottom: 1rem;
 }
+/* Rótulos das categorias de filtro */
 .filter-category label {
+    /* Transforma o rótulo em um bloco */
     display: block;
+    /* Margem inferior */
     margin-bottom: 0.5rem;
+    /* Cursor de ponteiro */
     cursor: pointer;
+    /* Transição suave na cor */
     transition: color 0.2s;
 }
+/* Efeito de hover nos rótulos */
 .filter-category label:hover {
-    color: #e94560; /* Accent color on hover */
+    /* Muda a cor para o destaque */
+    color: #e94560;
 }
+/* Estilos para os cartões de jogo */
 .game-card {
-    background-color: #0f3460; /* Dark blue for game cards */
+    /* Cor de fundo azul escura */
+    background-color: #0f3460;
+    /* Borda arredondada */
     border-radius: 0.75rem;
+    /* Esconde o conteúdo que transborda */
     overflow: hidden;
+    /* Sombra para o cartão */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Transição suave para a animação */
     transition: transform 0.2s, box-shadow 0.2s;
 }
+/* Efeito de hover nos cartões */
 .game-card:hover {
+    /* Move o cartão um pouco para cima */
     transform: translateY(-5px);
+    /* Aumenta a sombra */
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
+/* Imagens dos cartões de jogo */
 .game-card img {
+    /* Largura total e altura fixa */
     width: 100%;
     height: 180px;
+    /* Preenche o contêiner e corta a imagem */
     object-fit: cover;
 }
+/* Corpo do cartão */
 .game-card-body {
+    /* Preenchimento interno */
     padding: 1rem;
 }
+/* Título do cartão */
 .game-card-title {
+    /* Tamanho e peso da fonte */
     font-size: 1.125rem;
     font-weight: bold;
+    /* Cor do texto */
     color: #e0e0e0;
+    /* Margem inferior */
     margin-bottom: 0.5rem;
 }
+/* Gênero do jogo no cartão */
 .game-card-genre {
+    /* Tamanho e cor da fonte */
     font-size: 0.875rem;
     color: #b0b0b0;
+    /* Margem inferior */
     margin-bottom: 0.75rem;
 }
+/* Preço do jogo no cartão */
 .game-card-price {
+    /* Tamanho e peso da fonte */
     font-size: 1.25rem;
     font-weight: bold;
-    color: #e94560; /* Accent color for price */
+    /* Cor de destaque */
+    color: #e94560;
 }
+/* Botão 'Adicionar ao carrinho' */
 .add-to-cart-btn {
-    background-color: #e94560; /* Accent color for add to cart button */
+    /* Cor de fundo de destaque */
+    background-color: #e94560;
+    /* Cor do texto branca */
     color: white;
+    /* Preenchimento interno */
     padding: 0.5rem 1rem;
+    /* Borda arredondada */
     border-radius: 0.375rem;
+    /* Transição suave na cor de fundo */
     transition: background-color 0.2s;
 }
+/* Efeito de hover no botão */
 .add-to-cart-btn:hover {
-    background-color: #c73a50; /* Darker accent on hover */
+    /* Cor de fundo mais escura */
+    background-color: #c73a50;
 }
+/* Seção de ícones sociais */
 .social-section {
+    /* Cor de fundo azul mais escura */
     background-color: #16213e;
+    /* Preenchimento interno */
     padding: 1.5rem;
+    /* Borda arredondada */
     border-radius: 0.75rem;
+    /* Margem superior e alinhamento do texto */
     margin-top: 1.5rem;
     text-align: center;
 }
+/* Links dos ícones sociais */
 .social-icons a {
+    /* Cor do ícone */
     color: #e0e0e0;
+    /* Tamanho da fonte e margem */
     font-size: 1.5rem;
     margin: 0 0.75rem;
+    /* Transição suave na cor */
     transition: color 0.2s;
 }
+/* Efeito de hover nos ícones sociais */
 .social-icons a:hover {
+    /* Muda a cor para o destaque */
     color: #e94560;
 }
 
 /* Payment Section Styles */
+/* Estilos para a seção de pagamento */
 .payment-container {
+    /* Cor de fundo azul mais escura */
     background-color: #16213e;
+    /* Preenchimento interno */
     padding: 2.5rem;
+    /* Borda arredondada e sombra */
     border-radius: 1rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
+/* Item do resumo do produto */
 .product-summary-item {
+    /* Layout flexível */
     display: flex;
+    /* Espaço entre os itens e alinhamento vertical */
     justify-content: space-between;
     align-items: center;
+    /* Preenchimento e borda inferior tracejada */
     padding: 0.75rem 0;
     border-bottom: 1px dashed #0f3460;
 }
+/* Remove a borda do último item */
 .product-summary-item:last-child {
     border-bottom: none;
 }
+/* Contêiner do QR Code */
 .qr-container {
+    /* Cor de fundo azul escura */
     background-color: #0f3460;
+    /* Borda arredondada e preenchimento */
     border-radius: 0.75rem;
     padding: 2rem;
+    /* Alinhamento do texto e altura mínima */
     text-align: center;
     min-height: 200px;
+    /* Layout flexível para centralizar o conteúdo */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+/* Estilo para o ícone de placeholder do QR Code */
 .qr-placeholder {
+    /* Tamanho e cor do ícone */
     font-size: 4rem;
     color: #e94560;
 }
+/* Imagem do QR Code */
 .qr-container img {
+    /* Largura e altura da imagem */
     width: 150px;
     height: 150px;
+    /* Margem inferior */
     margin-bottom: 1rem;
 }
 
 /* Cart Sidebar Styles */
+/* Estilos para a barra lateral do carrinho */
 .cart-sidebar {
+    /* Posicionamento fixo na tela */
     position: fixed;
+    /* Posição no canto superior direito */
     right: 0;
     top: 0;
+    /* Altura total e largura fixa */
     height: 100%;
     width: 350px;
+    /* Cor de fundo azul mais escura */
     background-color: #16213e;
+    /* Sombra e transformação */
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    /* Inicia fora da tela */
     transform: translateX(100%);
+    /* Transição suave para a animação */
     transition: transform 0.3s ease-in-out;
+    /* Z-index para sobrepor outros elementos */
     z-index: 1000;
+    /* Layout flexível para o conteúdo */
     display: flex;
     flex-direction: column;
 }
+/* Classe para abrir a barra lateral */
 .cart-sidebar.open {
+    /* Move a barra para a posição visível */
     transform: translateX(0);
 }
+/* Cabeçalho do carrinho */
 .cart-header {
+    /* Preenchimento e cor de fundo */
     padding: 1.5rem;
     background-color: #1a1a2e;
     color: white;
+    /* Layout flexível para o título e o botão de fechar */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* Borda inferior */
     border-bottom: 1px solid #0f3460;
 }
+/* Título do cabeçalho */
 .cart-header h5 {
+    /* Remove a margem e ajusta a fonte */
     margin: 0;
     font-size: 1.25rem;
 }
+/* Corpo do carrinho */
 .cart-body {
+    /* Permite que o corpo ocupe o espaço restante */
     flex-grow: 1;
+    /* Preenchimento e barra de rolagem vertical */
     padding: 1.5rem;
     overflow-y: auto;
     color: #e0e0e0;
 }
+/* Rodapé do carrinho */
 .cart-footer {
+    /* Preenchimento e cor de fundo */
     padding: 1.5rem;
     background-color: #1a1a2e;
+    /* Borda superior */
     border-top: 1px solid #0f3460;
 }
+/* Item do carrinho */
 .cart-item {
+    /* Layout flexível */
     display: flex;
     align-items: center;
+    /* Margem e borda inferior */
     margin-bottom: 1rem;
     border-bottom: 1px dashed #0f3460;
     padding-bottom: 1rem;
 }
+/* Remove a borda do último item */
 .cart-item:last-child {
     border-bottom: none;
 }
+/* Imagem do item do carrinho */
 .cart-item img {
+    /* Largura, altura, e outros estilos da imagem */
     width: 60px;
     height: 60px;
     object-fit: cover;
     border-radius: 0.375rem;
     margin-right: 1rem;
 }
+/* Detalhes do item do carrinho */
 .cart-item-details {
+    /* Permite que ocupe o espaço restante */
     flex-grow: 1;
 }
+/* Título do item */
 .cart-item-details h6 {
+    /* Remove a margem e ajusta a fonte */
     margin: 0;
     font-size: 1rem;
     color: #e0e0e0;
 }
+/* Preço e quantidade do item */
 .cart-item-details p {
+    /* Remove a margem e ajusta a fonte */
     margin: 0;
     font-size: 0.875rem;
     color: #b0b0b0;
 }
+/* Botão de remover item */
 .cart-item-remove-btn {
+    /* Estilos do botão */
     background-color: #e94560;
     color: white;
     border: none;
@@ -243,37 +384,49 @@ body {
     cursor: pointer;
     transition: background-color 0.2s;
 }
+/* Efeito de hover no botão de remover */
 .cart-item-remove-btn:hover {
     background-color: #c73a50;
 }
 
 /* Toast Messages */
+/* Estilos para as mensagens de notificação (toast) */
 .toast-message {
+    /* Posicionamento fixo */
     position: fixed;
+    /* Posição no canto superior direito */
     top: 20px;
     right: 20px;
-    background-color: #28a745; /* Default success color */
+    /* Cor de fundo padrão (sucesso) */
+    background-color: #28a745;
+    /* Cor do texto, preenchimento e borda arredondada */
     color: white;
     padding: 15px 20px;
     border-radius: 5px;
+    /* Z-index alto para sobrepor tudo */
     z-index: 9999;
+    /* Sombra e animação */
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     font-weight: 500;
     animation: fadeIn 0.3s ease-out forwards, fadeOut 0.3s ease-in forwards 2.7s;
 }
+/* Variação de cor para mensagem de erro */
 .toast-message.error {
     background-color: #dc3545;
 }
+/* Variação de cor para mensagem de aviso */
 .toast-message.warning {
     background-color: #ffc107;
-    color: #333; /* Darker text for warning */
+    color: #333;
 }
 
+/* Animação de entrada (fadeIn) */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Animação de saída (fadeOut) */
 @keyframes fadeOut {
     from { opacity: 1; transform: translateY(0); }
     to { opacity: 0; transform: translateY(-20px); }

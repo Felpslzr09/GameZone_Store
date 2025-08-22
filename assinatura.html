@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planos de Assinatura | GameZone Store</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0f3460;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    nav {
+      background-color: #16213e;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav div {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff0000;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 30px 0;
+      font-size: 2.5rem;
+    }
+
+    .plans-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 20px 40px;
+    }
+
+    .card {
+      background-color: #054696;
+      border-radius: 12px;
+      padding: 25px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px #16213e;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      margin-bottom: 20px;
+    }
+
+    .card button {
+      background: linear-gradient(to right, #ff0000, #cc0000);
+      border: none;
+      padding: 12px 25px;
+      color: #ffffff;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .card button:hover {
+      background: linear-gradient(to right, #e60000, #990000);
+    }
+
+    .recomendado::after {
+      content: "★ RECOMENDADO";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #ff0000;
+      color: #fff;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 5px;
+      transform: rotate(5deg);
+    }
+
+    .voltar {
+      color: #ff0000;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      margin: 30px 0;
+      font-weight: bold;
+    }
+
+    .voltar:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .plans-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div>🎮 GameZone Store</div>
+    <div><a href="index.html">Voltar inicio</a></div>
+  </nav>
+
+  <h1>Escolha seu Plano</h1>
+
+  <section class="plans-container">
+    <div class="card">
+      <h2>Assinatura Básica</h2>
+      <p>Acesso limitado a jogos selecionados.</p>
+     <h4>Valor R$19.99</h4>
+     <button data-plan="Básica" data-price="19.99">Assinar</button>
+    
+    </div>
+
+    <div class="card recomendado">
+      <h2>Assinatura Média</h2>
+      <p>Acesso a mais jogos e conteúdos extras.</p>
+      <h4>valor R$ 39.90</h4>
+      <button data-plan="Média" data-price="39.99">Assinar</button>
+    </div>
+
+    <div class="card">
+      <h2>Assinatura Pro</h2>
+      <p>Acesso total a todos os jogos e benefícios exclusivos.</p>
+      <h4>Valor R$59.90</h4>
+      <button data-plan="Pro" data-price="59.99">Assinar</button>
+    </div>
+  </section>
+
+  <a class="voltar" href="index.html">Voltar</a>
+
+  <script>
+    // Seleciona todos os botões
+    const buttons = document.querySelectorAll('.card button');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const plan = button.getAttribute('data-plan');
+        const price = button.getAttribute('data-price');
+
+        // Aqui você pode adicionar ao carrinho real
+        alert(`Plano "${plan}" adicionado ao carrinho!\nValor: R$ ${price}`);
+      });
+    });
+  </script>
+</body>
+</html>

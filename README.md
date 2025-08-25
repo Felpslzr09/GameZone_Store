@@ -41,3 +41,7 @@ Criar um site funcional que permita aos usuários buscar, filtrar, comprar e pag
 Utilizar APIs externas para enriquecer a experiência do usuário (RAWG.io para jogos e API de QR Code para pagamento).
 
 Aplicar boas práticas de desenvolvimento, como o uso de Git e GitHub para controle de versão.
+
+Motivo: 
+
+Estamos criando este site porque somos apaixonados por jogos e temos um grande interesse por comércio.

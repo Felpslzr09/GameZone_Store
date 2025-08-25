@@ -4,38 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameZone Store</title>
-
-    <!-- Inclusão do CDN do Tailwind CSS para estilização rápida e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Inclusão do Font Awesome para ícones -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Link para o arquivo CSS personalizado (local) -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-[#1a1a2e] text-[#e0e0e0] font-sans">
 
     <!-- Barra de navegação -->
     <nav class="bg-[#16213e] p-4 shadow-lg navbar-custom">
         <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo e nome da loja com ícone -->
             <a class="text-white text-2xl font-bold flex items-center" href="index.html">
                 <i class="fas fa-gamepad mr-2"></i>GameZone Store
             </a>
             <div class="flex items-center space-x-4">
-                <!-- Link para a página principal -->
                 <a class="text-white hover:text-[#e94560] px-3 py-2 rounded-md transition duration-200" href="index.html">Home</a>
-
-                <!-- Botão para acessar a página de pagamento -->
                 <a class="bg-[#0f3460] text-white px-4 py-2 rounded-full hover:bg-[#23395d] transition duration-200 flex items-center shadow-md" href="payment.html">
                     <i class="fas fa-credit-card mr-2"></i>Pagamento
                 </a>
-               <a class="bg-[#0f3460] text-white px-4 py-2 rounded-full hover:bg-[#23395d] transition duration-200 flex items-center shadow-md" href="assinatura.html">
-                 <i class="fas fa-star mr-2"></i>Assinatura
+                <a class="bg-[#0f3460] text-white px-4 py-2 rounded-full hover:bg-[#23395d] transition duration-200 flex items-center shadow-md" href="assinatura.html">
+                    <i class="fas fa-star mr-2"></i>Assinatura
                 </a>
-
-                <!-- Botão do carrinho de compras com contador -->
                 <button class="relative bg-[#e94560] text-white px-4 py-2 rounded-full hover:bg-[#c73a50] transition duration-200 flex items-center justify-center shadow-md" onclick="toggleCart()">
                     <i class="fas fa-shopping-cart text-lg"></i>
                     <span class="cart-badge absolute -top-1 -right-1 bg-white text-[#e94560] rounded-full text-xs w-5 h-5 flex items-center justify-center font-bold" id="cartCount">0</span>
@@ -59,16 +47,12 @@
                 <!-- Barra lateral de filtro -->
                 <div class="lg:w-1/4">
                     <div class="filter-sidebar bg-[#16213e] p-6 rounded-xl shadow-lg">
-                        <!-- Título da seção de filtros -->
                         <div class="filter-title text-2xl font-bold text-[#e94560] mb-4 flex items-center">
                             <i class="fas fa-filter mr-3"></i>Filtrar Jogos
                         </div>
-
-                        <!-- Categorias de filtro de jogos -->
                         <div class="mb-6">
                             <h6 class="text-lg font-semibold mb-3">Tipo de Jogo</h6>
                             <div class="filter-category text-base">
-                                <!-- Opções de filtro (checkboxes) para tipo de jogo -->
                                 <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
                                     <input type="checkbox" value="Action" onchange="filterGames()" class="mr-2 accent-[#e94560]"> Ação
                                 </label>
@@ -95,8 +79,6 @@
                                 </label>
                             </div>
                         </div>
-
-                        <!-- Botão para limpar filtros -->
                         <button class="bg-gray-700 text-white w-full py-3 rounded-lg hover:bg-gray-600 transition duration-200 shadow-md" onclick="clearFilters()">
                             <i class="fas fa-eraser mr-2"></i>Limpar Filtros
                         </button>
@@ -106,7 +88,6 @@
                     <div class="social-section bg-[#16213e] p-6 rounded-xl shadow-lg mt-8 text-center">
                         <h6 class="text-lg font-semibold mb-4">Siga-nos nas Redes Sociais</h6>
                         <div class="flex justify-center space-x-5">
-                            <!-- Links das redes sociais -->
                             <a href="#" class="social-icon text-[#e0e0e0] hover:text-[#e94560] text-3xl transition duration-200">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
@@ -126,7 +107,6 @@
                 <!-- Catálogo de Jogos -->
                 <div class="lg:w-3/4">
                     <div class="flex justify-between items-center mb-6">
-                        <!-- Título do catálogo e número de jogos encontrados -->
                         <h4 class="text-3xl font-bold text-white">Catálogo de Jogos</h4>
                         <span id="gameCount" class="text-white text-lg font-medium">0 jogos encontrados</span>
                     </div>
@@ -156,19 +136,16 @@
     <!-- Barra lateral do Carrinho de Compras -->
     <div class="cart-sidebar fixed right-0 top-0 h-full w-80 bg-[#16213e] shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col z-50" id="cartSidebar">
         <div class="cart-header flex justify-between items-center p-6 bg-[#1a1a2e] text-white border-b border-[#0f3460]">
-            <!-- Título do carrinho e botão de fechar -->
             <h5 class="text-xl font-bold flex items-center"><i class="fas fa-shopping-cart mr-3"></i>Carrinho</h5>
             <button class="text-white hover:text-gray-300 text-2xl" onclick="toggleCart()">&times;</button>
         </div>
         <div class="cart-body flex-grow p-6 overflow-y-auto text-[#e0e0e0]" id="cartBody">
             <p class="text-gray-400 text-center py-8">Carrinho vazio</p>
-            <!-- Os itens do carrinho serão carregados aqui -->
         </div>
         <div class="cart-footer p-6 bg-[#1a1a2e] border-t border-[#0f3460]">
-            <!-- Total do carrinho e botão para finalizar a compra -->
             <div class="flex justify-between items-center text-2xl font-bold mb-6">
                 <span class="text-white">Total:</span>
-                <span class="text-[#e94560]">$<span id="cartTotal">0.00</span></span>
+                <span class="text-[#e94560]">R$<span id="cartTotal">0.00</span></span>
             </div>
             <button class="bg-[#e94560] text-white w-full py-4 rounded-xl hover:bg-[#c73a50] transition duration-200 shadow-lg text-lg font-semibold flex items-center justify-center" onclick="goToPayment()" disabled id="checkoutBtn">
                 <i class="fas fa-credit-card mr-3"></i>Finalizar Compra
@@ -179,10 +156,12 @@
     <!-- Botão flutuante para ir ao pagamento -->
     <button id="floatingCheckoutBtn" class="fixed bottom-8 right-8 bg-[#e94560] text-white p-4 rounded-full shadow-lg hover:bg-[#c73a50] transition duration-300 text-lg font-bold flex items-center space-x-2 z-40 hidden" onclick="goToPayment()">
         <i class="fas fa-credit-card"></i>
-        <span>Ir para o Pagamento ($<span id="floatingCheckoutTotal">0.00</span>)</span>
+        <span>Ir para o Pagamento (R$<span id="floatingCheckoutTotal">0.00</span>)</span>
     </button>
 
-    <!-- Link para o script JavaScript único que gerencia as interações -->
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50"></div>
+
     <script src="script.js"></script>
 </body>
 </html>

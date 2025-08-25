@@ -1,433 +1,271 @@
-/* Estilos personalizados para elementos que não são facilmente manipulados pelo Tailwind ou para sobrescrever estilos existentes */
+/* === Estilo Global GameZone Store === */
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo */
 body {
-    /* Define a fonte do corpo do documento */
-    font-family: "Inter", sans-serif;
-    /* Cor de fundo escura do wireframe */
-    background-color: #1a1a2e;
-    /* Cor do texto clara */
-    color: #e0e0e0;
-}
-/* Classe para esconder seções da página */
-.section-hidden {
-    display: none;
-}
-/* Estilos para a barra de navegação personalizada */
-.navbar-custom {
-    /* Cor de fundo azul mais escura */
-    background-color: #16213e;
-}
-/* Estilos para o contador de itens do carrinho (badge) */
-.cart-badge {
-    /* Posiciona o badge de forma absoluta em relação ao seu contêiner */
-    position: absolute;
-    /* Ajusta a posição no canto superior direito */
-    top: -5px;
-    right: -5px;
-    /* Cor de destaque para o badge */
-    background-color: #e94560;
-    /* Cor do texto branca */
-    color: white;
-    /* Borda circular para o badge */
-    border-radius: 50%;
-    /* Preenchimento interno */
-    padding: 2px 7px;
-    /* Tamanho da fonte menor */
-    font-size: 0.75rem;
-}
-/* Contêiner para a barra de pesquisa */
-.search-container {
-    /* Posicionamento relativo para aninhar o ícone */
-    position: relative;
-    /* Largura máxima e 100% de largura */
-    max-width: 500px;
-    width: 100%;
-}
-/* Estilos para o campo de entrada de pesquisa */
-.search-input {
-    /* Preenchimento à esquerda para o ícone de pesquisa */
-    padding-left: 2.5rem;
-    /* Cor de fundo azul escura */
-    background-color: #0f3460;
-    /* Borda sólida na cor do fundo */
-    border: 1px solid #1a1a2e;
-    /* Cor do texto clara */
-    color: #e0e0e0;
-    /* Borda arredondada */
-    border-radius: 0.5rem;
-}
-/* Estilos para o ícone de pesquisa */
-.search-icon {
-    /* Posicionamento absoluto para o ícone */
-    position: absolute;
-    /* Posição à esquerda */
-    left: 0.75rem;
-    /* Alinha verticalmente ao centro */
-    top: 50%;
-    transform: translateY(-50%);
-    /* Cor do ícone */
-    color: #e0e0e0;
-}
-/* Estilos para a barra lateral de filtros */
-.filter-sidebar {
-    /* Cor de fundo azul mais escura */
-    background-color: #16213e;
-    /* Preenchimento interno */
-    padding: 1.5rem;
-    /* Borda arredondada */
-    border-radius: 0.75rem;
-}
-/* Título dos filtros */
-.filter-title {
-    /* Tamanho e peso da fonte */
-    font-size: 1.25rem;
-    font-weight: bold;
-    /* Cor de destaque */
-    color: #e94560;
-    /* Margem inferior */
-    margin-bottom: 1rem;
-}
-/* Rótulos das categorias de filtro */
-.filter-category label {
-    /* Transforma o rótulo em um bloco */
-    display: block;
-    /* Margem inferior */
-    margin-bottom: 0.5rem;
-    /* Cursor de ponteiro */
-    cursor: pointer;
-    /* Transição suave na cor */
-    transition: color 0.2s;
-}
-/* Efeito de hover nos rótulos */
-.filter-category label:hover {
-    /* Muda a cor para o destaque */
-    color: #e94560;
-}
-/* Estilos para os cartões de jogo */
-.game-card {
-    /* Cor de fundo azul escura */
-    background-color: #0f3460;
-    /* Borda arredondada */
-    border-radius: 0.75rem;
-    /* Esconde o conteúdo que transborda */
-    overflow: hidden;
-    /* Sombra para o cartão */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Transição suave para a animação */
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-/* Efeito de hover nos cartões */
-.game-card:hover {
-    /* Move o cartão um pouco para cima */
-    transform: translateY(-5px);
-    /* Aumenta a sombra */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-/* Imagens dos cartões de jogo */
-.game-card img {
-    /* Largura total e altura fixa */
-    width: 100%;
-    height: 180px;
-    /* Preenche o contêiner e corta a imagem */
-    object-fit: cover;
-}
-/* Corpo do cartão */
-.game-card-body {
-    /* Preenchimento interno */
-    padding: 1rem;
-}
-/* Título do cartão */
-.game-card-title {
-    /* Tamanho e peso da fonte */
-    font-size: 1.125rem;
-    font-weight: bold;
-    /* Cor do texto */
-    color: #e0e0e0;
-    /* Margem inferior */
-    margin-bottom: 0.5rem;
-}
-/* Gênero do jogo no cartão */
-.game-card-genre {
-    /* Tamanho e cor da fonte */
-    font-size: 0.875rem;
-    color: #b0b0b0;
-    /* Margem inferior */
-    margin-bottom: 0.75rem;
-}
-/* Preço do jogo no cartão */
-.game-card-price {
-    /* Tamanho e peso da fonte */
-    font-size: 1.25rem;
-    font-weight: bold;
-    /* Cor de destaque */
-    color: #e94560;
-}
-/* Botão 'Adicionar ao carrinho' */
-.add-to-cart-btn {
-    /* Cor de fundo de destaque */
-    background-color: #e94560;
-    /* Cor do texto branca */
-    color: white;
-    /* Preenchimento interno */
-    padding: 0.5rem 1rem;
-    /* Borda arredondada */
-    border-radius: 0.375rem;
-    /* Transição suave na cor de fundo */
-    transition: background-color 0.2s;
-}
-/* Efeito de hover no botão */
-.add-to-cart-btn:hover {
-    /* Cor de fundo mais escura */
-    background-color: #c73a50;
-}
-/* Seção de ícones sociais */
-.social-section {
-    /* Cor de fundo azul mais escura */
-    background-color: #16213e;
-    /* Preenchimento interno */
-    padding: 1.5rem;
-    /* Borda arredondada */
-    border-radius: 0.75rem;
-    /* Margem superior e alinhamento do texto */
-    margin-top: 1.5rem;
-    text-align: center;
-}
-/* Links dos ícones sociais */
-.social-icons a {
-    /* Cor do ícone */
-    color: #e0e0e0;
-    /* Tamanho da fonte e margem */
-    font-size: 1.5rem;
-    margin: 0 0.75rem;
-    /* Transição suave na cor */
-    transition: color 0.2s;
-}
-/* Efeito de hover nos ícones sociais */
-.social-icons a:hover {
-    /* Muda a cor para o destaque */
-    color: #e94560;
+  background-color: #0f0f1a;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
 }
 
-/* Payment Section Styles */
-/* Estilos para a seção de pagamento */
-.payment-container {
-    /* Cor de fundo azul mais escura */
-    background-color: #16213e;
-    /* Preenchimento interno */
-    padding: 2.5rem;
-    /* Borda arredondada e sombra */
-    border-radius: 1rem;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-/* Item do resumo do produto */
-.product-summary-item {
-    /* Layout flexível */
-    display: flex;
-    /* Espaço entre os itens e alinhamento vertical */
-    justify-content: space-between;
-    align-items: center;
-    /* Preenchimento e borda inferior tracejada */
-    padding: 0.75rem 0;
-    border-bottom: 1px dashed #0f3460;
-}
-/* Remove a borda do último item */
-.product-summary-item:last-child {
-    border-bottom: none;
-}
-/* Contêiner do QR Code */
-.qr-container {
-    /* Cor de fundo azul escura */
-    background-color: #0f3460;
-    /* Borda arredondada e preenchimento */
-    border-radius: 0.75rem;
-    padding: 2rem;
-    /* Alinhamento do texto e altura mínima */
-    text-align: center;
-    min-height: 200px;
-    /* Layout flexível para centralizar o conteúdo */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-/* Estilo para o ícone de placeholder do QR Code */
-.qr-placeholder {
-    /* Tamanho e cor do ícone */
-    font-size: 4rem;
-    color: #e94560;
-}
-/* Imagem do QR Code */
-.qr-container img {
-    /* Largura e altura da imagem */
-    width: 150px;
-    height: 150px;
-    /* Margem inferior */
-    margin-bottom: 1rem;
+/* Navbar */
+.navbar {
+  background-color: #1a1a2e;
+  padding: 1rem 2rem;
 }
 
-/* Cart Sidebar Styles */
-/* Estilos para a barra lateral do carrinho */
-.cart-sidebar {
-    /* Posicionamento fixo na tela */
-    position: fixed;
-    /* Posição no canto superior direito */
-    right: 0;
-    top: 0;
-    /* Altura total e largura fixa */
-    height: 100%;
-    width: 350px;
-    /* Cor de fundo azul mais escura */
-    background-color: #16213e;
-    /* Sombra e transformação */
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-    /* Inicia fora da tela */
-    transform: translateX(100%);
-    /* Transição suave para a animação */
-    transition: transform 0.3s ease-in-out;
-    /* Z-index para sobrepor outros elementos */
-    z-index: 1000;
-    /* Layout flexível para o conteúdo */
-    display: flex;
-    flex-direction: column;
-}
-/* Classe para abrir a barra lateral */
-.cart-sidebar.open {
-    /* Move a barra para a posição visível */
-    transform: translateX(0);
-}
-/* Cabeçalho do carrinho */
-.cart-header {
-    /* Preenchimento e cor de fundo */
-    padding: 1.5rem;
-    background-color: #1a1a2e;
-    color: white;
-    /* Layout flexível para o título e o botão de fechar */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* Borda inferior */
-    border-bottom: 1px solid #0f3460;
-}
-/* Título do cabeçalho */
-.cart-header h5 {
-    /* Remove a margem e ajusta a fonte */
-    margin: 0;
-    font-size: 1.25rem;
-}
-/* Corpo do carrinho */
-.cart-body {
-    /* Permite que o corpo ocupe o espaço restante */
-    flex-grow: 1;
-    /* Preenchimento e barra de rolagem vertical */
-    padding: 1.5rem;
-    overflow-y: auto;
-    color: #e0e0e0;
-}
-/* Rodapé do carrinho */
-.cart-footer {
-    /* Preenchimento e cor de fundo */
-    padding: 1.5rem;
-    background-color: #1a1a2e;
-    /* Borda superior */
-    border-top: 1px solid #0f3460;
-}
-/* Item do carrinho */
-.cart-item {
-    /* Layout flexível */
-    display: flex;
-    align-items: center;
-    /* Margem e borda inferior */
-    margin-bottom: 1rem;
-    border-bottom: 1px dashed #0f3460;
-    padding-bottom: 1rem;
-}
-/* Remove a borda do último item */
-.cart-item:last-child {
-    border-bottom: none;
-}
-/* Imagem do item do carrinho */
-.cart-item img {
-    /* Largura, altura, e outros estilos da imagem */
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 0.375rem;
-    margin-right: 1rem;
-}
-/* Detalhes do item do carrinho */
-.cart-item-details {
-    /* Permite que ocupe o espaço restante */
-    flex-grow: 1;
-}
-/* Título do item */
-.cart-item-details h6 {
-    /* Remove a margem e ajusta a fonte */
-    margin: 0;
-    font-size: 1rem;
-    color: #e0e0e0;
-}
-/* Preço e quantidade do item */
-.cart-item-details p {
-    /* Remove a margem e ajusta a fonte */
-    margin: 0;
-    font-size: 0.875rem;
-    color: #b0b0b0;
-}
-/* Botão de remover item */
-.cart-item-remove-btn {
-    /* Estilos do botão */
-    background-color: #e94560;
-    color: white;
-    border: none;
-    padding: 0.3rem 0.6rem;
-    border-radius: 0.25rem;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-/* Efeito de hover no botão de remover */
-.cart-item-remove-btn:hover {
-    background-color: #c73a50;
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #e94560 !important;
 }
 
-/* Toast Messages */
-/* Estilos para as mensagens de notificação (toast) */
-.toast-message {
-    /* Posicionamento fixo */
-    position: fixed;
-    /* Posição no canto superior direito */
-    top: 20px;
-    right: 20px;
-    /* Cor de fundo padrão (sucesso) */
-    background-color: #28a745;
-    /* Cor do texto, preenchimento e borda arredondada */
-    color: white;
-    padding: 15px 20px;
-    border-radius: 5px;
-    /* Z-index alto para sobrepor tudo */
-    z-index: 9999;
-    /* Sombra e animação */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    font-weight: 500;
-    animation: fadeIn 0.3s ease-out forwards, fadeOut 0.3s ease-in forwards 2.7s;
-}
-/* Variação de cor para mensagem de erro */
-.toast-message.error {
-    background-color: #dc3545;
-}
-/* Variação de cor para mensagem de aviso */
-.toast-message.warning {
-    background-color: #ffc107;
-    color: #333;
+.navbar-nav .nav-link {
+  color: #e0e0e0 !important;
+  margin-left: 1rem;
 }
 
-/* Animação de entrada (fadeIn) */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+.navbar-nav .nav-link:hover {
+  color: #e94560 !important;
 }
 
-/* Animação de saída (fadeOut) */
-@keyframes fadeOut {
-    from { opacity: 1; transform: translateY(0); }
-    to { opacity: 0; transform: translateY(-20px); }
+/* Containers */
+.container-custom {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Cards */
+.card-custom {
+  background: #1a1a2e;
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem;
+  text-align: center;
+  color: #e0e0e0;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+
+.card-custom:hover {
+  transform: translateY(-5px);
+}
+
+.card-custom h2 {
+  color: #e94560;
+  margin-bottom: 1rem;
+}
+
+/* Botões */
+.btn-custom {
+  background: #e94560;
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.btn-custom:hover {
+  background: #c73a50;
+}
+
+/* Carrinho */
+#carrinho {
+  background: #1a1a2e;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+}
+
+#carrinho h3 {
+  color: #e94560;
+  margin-bottom: 0.5rem;
+}
+
+#itensCarrinho {
+  list-style: none;
+  padding: 0;
+}
+
+#itensCarrinho li {
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+}
+
+/* Payment */
+.payment-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #1a1a2e;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.payment-section h2 {
+  margin-bottom: 1rem;
+  color: #e94560;
+}
+
+#paymentSummary {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+#paymentSummary li {
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+}
+
+#paymentTotal {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+#qrContainer {
+  margin-top: 1rem;
+}
+
+#qrContainer canvas {
+  margin: 0 auto;
+  display: block;
+}
+
+.pix-info {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: #1a1a2e;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background:#0f3460; color:#fff; line-height:1.6; }
+    nav { background:#16213e; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+    nav div { font-size:1.2rem; font-weight:bold; }
+    nav a { color:#fff; text-decoration:none; margin-left:20px; font-weight:bold; transition:0.3s; }
+    nav a:hover { color:#e94560; }
+    h1 { text-align:center; margin:20px 0; font-size:2.5rem; }
+    .plans-container { display:flex; flex-wrap:wrap; justify-content:center; gap:30px; padding:0 20px 40px; }
+    .card { background:#054696; border-radius:12px; padding:25px; width:300px; text-align:center; box-shadow:0 6px 12px rgba(0,0,0,0.4); transition:0.3s; position:relative; }
+    .card:hover { transform:translateY(-5px); box-shadow:0 10px 20px #16213e; }
+    .card h2 { margin-bottom:10px; font-size:1.5rem; }
+    .card p { margin-bottom:20px; }
+    .card button { background:linear-gradient(to right,#e94560,#cc0000); border:none; padding:12px 25px; color:#fff; font-size:16px; border-radius:8px; cursor:pointer; transition:0.3s; }
+    .card button:hover { background:linear-gradient(to right,#e94560); }
+    .recomendado::after { content:"★ RECOMENDADO"; position:absolute; top:-10px; right:-10px; background:#e94560; color:#fff; padding:6px 12px; font-size:0.8rem; font-weight:bold; border-radius:5px; transform:rotate(5deg);}
+    #carrinho { background:#054696; padding:15px 20px; margin:20px auto; width:90%; max-width:600px; border-radius:10px; box-shadow:0 6px 12px rgba(0,0,0,0.4); }
+    #carrinho h3 { margin-bottom:10px; }
+    #itensCarrinho li { margin-bottom:5px; }
+    .voltar { color:#e94560; text-decoration:none; display:block; text-align:center; margin:30px 0; font-weight:bold; }
+    .voltar:hover { text-decoration:underline; }
+    @media(max-width:768px){ .plans-container{flex-direction:column; align-items:center;} }
+    /* ===== Estilo Geral ===== */
+body {
+  background-color: #0f0f1a; /* fundo escuro */
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  background-color: #1a1a2e;
+  padding: 1rem;
+}
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: #fff !important;
+}
+.navbar .nav-link:hover {
+  color: #e94560 !important;
+}
+
+/* ===== Container Principal ===== */
+.container-custom {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* ===== Carrinho ===== */
+#carrinho {
+  background: #1a1a2e;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  margin-bottom: 2rem;
+}
+#carrinho h3 {
+  color: #e94560;
+}
+#carrinho ul {
+  list-style: none;
+  padding: 0;
+}
+#carrinho li {
+  padding: 4px 0;
+  border-bottom: 1px solid #333;
+}
+
+/* ===== Cards ===== */
+.card-custom {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+.card-custom:hover {
+  transform: scale(1.05);
+}
+
+/* ===== Botões ===== */
+.btn-custom {
+  background: #e94560;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+.btn-custom:hover {
+  background: #c73a50;
+}
+
+/* ===== Rodapé ===== */
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: #1a1a2e;
+  color: #aaa;
+  font-size: 0.9rem;
 }

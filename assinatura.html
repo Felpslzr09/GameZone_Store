@@ -1,187 +1,512 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planos de Assinatura | GameZone Store</title>
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: #0f3460;
-      color: #fff;
-      line-height: 1.6;
-    }
-
-    nav {
-      background-color: #16213e;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    nav div {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #ff0000;
-    }
-
-    h1 {
-      text-align: center;
-      margin: 30px 0;
-      font-size: 2.5rem;
-    }
-
-    .plans-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      padding: 0 20px 40px;
-    }
-
-    .card {
-      background-color: #054696;
-      border-radius: 12px;
-      padding: 25px;
-      width: 300px;
-      text-align: center;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px #16213e;
-    }
-
-    .card h2 {
-      margin-bottom: 10px;
-      font-size: 1.5rem;
-    }
-
-    .card p {
-      margin-bottom: 20px;
-    }
-
-    .card button {
-      background: linear-gradient(to right, #ff0000, #cc0000);
-      border: none;
-      padding: 12px 25px;
-      color: #ffffff;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .card button:hover {
-      background: linear-gradient(to right, #e60000, #990000);
-    }
-
-    .recomendado::after {
-      content: "★ RECOMENDADO";
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background: #ff0000;
-      color: #fff;
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      border-radius: 5px;
-      transform: rotate(5deg);
-    }
-
-    .voltar {
-      color: #ff0000;
-      text-decoration: none;
-      display: block;
-      text-align: center;
-      margin: 30px 0;
-      font-weight: bold;
-    }
-
-    .voltar:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      .plans-container {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos de Assinatura - GameZone Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-[#1a1a2e] text-[#e0e0e0] font-sans min-h-screen">
 
-  <!-- Navbar -->
-  <nav>
-    <div>🎮 GameZone Store</div>
-    <div><a href="index.html">Voltar inicio</a></div>
-  </nav>
+    <!-- Barra de navegação -->
+    <nav class="bg-[#16213e] p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-2xl font-bold flex items-center" href="index.html">
+                <i class="fas fa-gamepad mr-2"></i>GameZone Store
+            </a>
+            <div class="flex items-center space-x-4">
+                <a class="text-white hover:text-[#e94560] px-3 py-2 rounded-md transition duration-200" href="index.html">Home</a>
+                <a class="bg-[#0f3460] text-white px-4 py-2 rounded-full hover:bg-[#23395d] transition duration-200 flex items-center shadow-md" href="payment.html">
+                    <i class="fas fa-credit-card mr-2"></i>Pagamento
+                </a>
+                <button class="relative bg-[#e94560] text-white px-4 py-2 rounded-full hover:bg-[#c73a50] transition duration-200 flex items-center justify-center shadow-md" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span class="cart-badge absolute -top-1 -right-1 bg-white text-[#e94560] rounded-full text-xs w-5 h-5 flex items-center justify-center font-bold" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-  <h1>Escolha seu Plano</h1>
+    <!-- Container principal -->
+    <div class="container mx-auto py-8 px-4">
+        <!-- Título da página -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-white mb-4">
+                <i class="fas fa-crown mr-3 text-[#e94560]"></i>Planos de Assinatura
+            </h1>
+            <p class="text-gray-400 text-lg">Escolha o plano perfeito para você e tenha acesso ilimitado aos melhores jogos</p>
+        </div>
 
-  <section class="plans-container">
-    <div class="card">
-      <h2>Assinatura Básica</h2>
-      <p>Acesso limitado a jogos selecionados.</p>
-     <h4>Valor R$19.99</h4>
-     <button data-plan="Básica" data-price="19.99">Assinar</button>
-    
+        <!-- Resumo do carrinho -->
+        <div class="max-w-2xl mx-auto mb-8">
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="bg-[#16213e] rounded-xl p-6 shadow-lg">
+                <h3 class="text-xl font-bold text-[#e94560] mb-4 flex items-center">
+                    <i class="fas fa-shopping-cart mr-3"></i>Itens no Carrinho
+                </h3>
+                <div id="cartSummary" class="text-gray-400">
+                    <p class="text-center py-4">Carrinho vazio</p>
+                </div>
+                <div class="border-t border-[#0f3460] pt-4 mt-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-semibold">Total:</span>
+                        <span class="text-[#e94560] font-bold text-xl">R$ <span id="totalPrice">0,00</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Planos de assinatura -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Plano Básico -->
+            <div class="bg-[#16213e] rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+                <div class="text-center">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-gamepad text-gray-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Básico</h2>
+                    <p class="text-gray-400 mb-6">Acesso limitado a jogos selecionados</p>
+                    
+                    <!-- Recursos -->
+                    <div class="text-left mb-6">
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                10 jogos por mês
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Suporte básico
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-times text-red-400 mr-2"></i>
+                                Sem jogos premium
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Preço e botão -->
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-[#e94560] mb-4">
+                            R$ 19,99<span class="text-sm text-gray-400">/mês</span>
+                        </div>
+                        <button class="w-full bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-200 font-semibold" 
+                                onclick="addSubscriptionToCart('Básico', '19.99')">
+                            <i class="fas fa-plus mr-2"></i>Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plano Médio (Recomendado) -->
+            <div class="bg-[#16213e] rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 relative border-2 border-[#e94560]">
+                <!-- Badge de recomendado -->
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <div class="bg-[#e94560] text-white px-4 py-1 rounded-full text-sm font-bold">
+                        <i class="fas fa-star mr-1"></i>RECOMENDADO
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-gamepad text-[#e94560]"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Médio</h2>
+                    <p class="text-gray-400 mb-6">Acesso a mais jogos e conteúdos extras</p>
+                    
+                    <!-- Recursos -->
+                    <div class="text-left mb-6">
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                50 jogos por mês
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Suporte prioritário
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Alguns jogos premium
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Acesso antecipado
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Preço e botão -->
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-[#e94560] mb-4">
+                            R$ 39,99<span class="text-sm text-gray-400">/mês</span>
+                        </div>
+                        <button class="w-full bg-[#e94560] text-white px-6 py-3 rounded-lg hover:bg-[#c73a50] transition duration-200 font-semibold" 
+                                onclick="addSubscriptionToCart('Médio', '39.99')">
+                            <i class="fas fa-plus mr-2"></i>Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plano Premium -->
+            <div class="bg-[#16213e] rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+                <div class="text-center">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-crown text-yellow-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Premium</h2>
+                    <p class="text-gray-400 mb-6">Acesso completo a todos os jogos e recursos</p>
+                    
+                    <!-- Recursos -->
+                    <div class="text-left mb-6">
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Jogos ilimitados
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Suporte VIP 24/7
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Todos os jogos premium
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Acesso beta exclusivo
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Desconto em compras
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Preço e botão -->
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-[#e94560] mb-4">
+                            R$ 59,99<span class="text-sm text-gray-400">/mês</span>
+                        </div>
+                        <button class="w-full bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700 transition duration-200 font-semibold" 
+                                onclick="addSubscriptionToCart('Premium', '59.99')">
+                            <i class="fas fa-crown mr-2"></i>Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefícios adicionais -->
+        <div class="mt-16 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-white text-center mb-8">
+                <i class="fas fa-gift mr-3 text-[#e94560]"></i>Benefícios Exclusivos
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-[#16213e] rounded-lg p-6 text-center shadow-lg">
+                    <div class="text-3xl text-[#e94560] mb-4">
+                        <i class="fas fa-cloud-download-alt"></i>
+                    </div>
+                    <h3 class="text-white font-bold mb-2">Download Rápido</h3>
+                    <p class="text-gray-400 text-sm">Servidores otimizados para downloads ultra-rápidos</p>
+                </div>
+                
+                <div class="bg-[#16213e] rounded-lg p-6 text-center shadow-lg">
+                    <div class="text-3xl text-[#e94560] mb-4">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="text-white font-bold mb-2">Atualizações Automáticas</h3>
+                    <p class="text-gray-400 text-sm">Seus jogos sempre atualizados automaticamente</p>
+                </div>
+                
+                <div class="bg-[#16213e] rounded-lg p-6 text-center shadow-lg">
+                    <div class="text-3xl text-[#e94560] mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-white font-bold mb-2">Comunidade</h3>
+                    <p class="text-gray-400 text-sm">Conecte-se com outros gamers e faça novos amigos</p>
+                </div>
+                
+                <div class="bg-[#16213e] rounded-lg p-6 text-center shadow-lg">
+                    <div class="text-3xl text-[#e94560] mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-white font-bold mb-2">Segurança</h3>
+                    <p class="text-gray-400 text-sm">Proteção completa contra malware e vírus</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="mt-16 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-white text-center mb-8">
+                <i class="fas fa-question-circle mr-3 text-[#e94560]"></i>Perguntas Frequentes
+            </h2>
+            
+            <div class="space-y-4">
+                <div class="bg-[#16213e] rounded-lg shadow-lg">
+                    <button class="w-full p-6 text-left flex justify-between items-center text-white hover:bg-[#1a1a2e] transition duration-200" onclick="toggleFAQ('faq1')">
+                        <span class="font-semibold">Posso cancelar minha assinatura a qualquer momento?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200" id="faq1-icon"></i>
+                    </button>
+                    <div class="hidden px-6 pb-6 text-gray-400" id="faq1-content">
+                        Sim! Você pode cancelar sua assinatura a qualquer momento sem taxas adicionais. O acesso será mantido até o final do período pago.
+                    </div>
+                </div>
+                
+                <div class="bg-[#16213e] rounded-lg shadow-lg">
+                    <button class="w-full p-6 text-left flex justify-between items-center text-white hover:bg-[#1a1a2e] transition duration-200" onclick="toggleFAQ('faq2')">
+                        <span class="font-semibold">Os jogos ficam salvos se eu cancelar?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200" id="faq2-icon"></i>
+                    </button>
+                    <div class="hidden px-6 pb-6 text-gray-400" id="faq2-content">
+                        Seus saves e progresso ficam salvos na nuvem. Se você reativar sua assinatura, tudo estará exatamente como deixou.
+                    </div>
+                </div>
+                
+                <div class="bg-[#16213e] rounded-lg shadow-lg">
+                    <button class="w-full p-6 text-left flex justify-between items-center text-white hover:bg-[#1a1a2e] transition duration-200" onclick="toggleFAQ('faq3')">
+                        <span class="font-semibold">Posso trocar de plano?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200" id="faq3-icon"></i>
+                    </button>
+                    <div class="hidden px-6 pb-6 text-gray-400" id="faq3-content">
+                        Claro! Você pode fazer upgrade ou downgrade do seu plano a qualquer momento. As mudanças entram em vigor no próximo ciclo de cobrança.
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="card recomendado">
-      <h2>Assinatura Média</h2>
-      <p>Acesso a mais jogos e conteúdos extras.</p>
-      <h4>valor R$ 39.90</h4>
-      <button data-plan="Média" data-price="39.99">Assinar</button>
+    <!-- Carrinho flutuante -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="fixed right-0 top-0 h-full w-full max-w-md bg-[#16213e] shadow-2xl transform translate-x-full transition-transform duration-300" id="cartSidebar">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-white flex items-center">
+                        <i class="fas fa-shopping-cart mr-2 text-[#e94560]"></i>Carrinho
+                    </h2>
+                    <button onclick="toggleCart()" class="text-gray-400 hover:text-white transition duration-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div id="cartItems" class="space-y-4 mb-6">
+                    <!-- Itens do carrinho serão inseridos aqui -->
+                </div>
+                
+                <div class="border-t border-[#0f3460] pt-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-white font-semibold">Total:</span>
+                        <span class="text-[#e94560] font-bold text-xl">R$ <span id="cartTotal">0,00</span></span>
+                    </div>
+                    <button class="w-full bg-[#e94560] text-white py-3 rounded-lg hover:bg-[#c73a50] transition duration-200 font-semibold" onclick="proceedToPayment()">
+                        <i class="fas fa-credit-card mr-2"></i>Finalizar Compra
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-      <h2>Assinatura Pro</h2>
-      <p>Acesso total a todos os jogos e benefícios exclusivos.</p>
-      <h4>Valor R$59.90</h4>
-      <button data-plan="Pro" data-price="59.99">Assinar</button>
-    </div>
-  </section>
+    <!-- Footer -->
+    <footer class="bg-[#16213e] mt-16 py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="text-3xl text-[#e94560] mb-4">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3 class="text-white text-xl font-bold mb-2">GameZone Store</h3>
+                <p class="text-gray-400 mb-4">Sua loja de jogos favorita</p>
+                <div class="flex justify-center space-x-4 text-gray-400">
+                    <a href="#" class="hover:text-[#e94560] transition duration-200">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="hover:text-[#e94560] transition duration-200">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="hover:text-[#e94560] transition duration-200">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="hover:text-[#e94560] transition duration-200">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+                <div class="mt-6 pt-6 border-t border-[#0f3460] text-gray-500 text-sm">
+                    <p>&copy; 2024 GameZone Store. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-  <a class="voltar" href="index.html">Voltar</a>
+    <script>
+        // Estado do carrinho
+        let cart = [];
+        let cartTotal = 0;
 
-  <script>
-    // Seleciona todos os botões
-    const buttons = document.querySelectorAll('.card button');
+        // Função para adicionar assinatura ao carrinho
+        function addSubscriptionToCart(planName, price) {
+            // Remove planos existentes (só pode ter um plano por vez)
+            cart = cart.filter(item => !item.isSubscription);
+            
+            // Adiciona o novo plano
+            cart.push({
+                name: planName,
+                price: parseFloat(price),
+                isSubscription: true,
+                id: 'sub_' + planName.toLowerCase()
+            });
+            
+            updateCartDisplay();
+            
+            // Mostra feedback visual
+            showNotification(`Plano ${planName} adicionado ao carrinho!`, 'success');
+        }
 
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const plan = button.getAttribute('data-plan');
-        const price = button.getAttribute('data-price');
+        // Função para remover item do carrinho
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCartDisplay();
+            showNotification('Item removido do carrinho', 'info');
+        }
 
-        // Aqui você pode adicionar ao carrinho real
-        alert(`Plano "${plan}" adicionado ao carrinho!\nValor: R$ ${price}`);
-      });
-    });
-  </script>
+        // Função para atualizar exibição do carrinho
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            const totalPrice = document.getElementById('totalPrice');
+            const cartSummary = document.getElementById('cartSummary');
+            const cartItems = document.getElementById('cartItems');
+            
+            // Calcula total
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            
+            // Atualiza contador
+            cartCount.textContent = cart.length;
+            
+            // Atualiza totais
+            cartTotal.textContent = total.toFixed(2).replace('.', ',');
+            totalPrice.textContent = total.toFixed(2).replace('.', ',');
+            
+            // Atualiza resumo do carrinho
+            if (cart.length === 0) {
+                cartSummary.innerHTML = '<p class="text-center py-4">Carrinho vazio</p>';
+                cartItems.innerHTML = '<p class="text-center py-4 text-gray-400">Seu carrinho está vazio</p>';
+            } else {
+                cartSummary.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center py-2">
+                        <span>${item.name}</span>
+                        <span class="font-bold">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                `).join('');
+                
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center bg-[#1a1a2e] rounded-lg p-4">
+                        <div>
+                            <h4 class="text-white font-semibold">${item.name}</h4>
+                            <p class="text-gray-400 text-sm">${item.isSubscription ? 'Assinatura mensal' : 'Produto'}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[#e94560] font-bold">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+                            <button onclick="removeFromCart('${item.id}')" class="text-red-400 hover:text-red-300 text-sm mt-1">
+                                <i class="fas fa-trash"></i> Remover
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Função para alternar carrinho
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            const sidebar = document.getElementById('cartSidebar');
+            
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    sidebar.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                sidebar.classList.add('translate-x-full');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Função para proceder ao pagamento
+        function proceedToPayment() {
+            if (cart.length === 0) {
+                showNotification('Adicione itens ao carrinho primeiro!', 'warning');
+                return;
+            }
+            
+            // Salva o carrinho no localStorage para a página de pagamento
+            localStorage.setItem('gameZoneCart', JSON.stringify(cart));
+            
+            // Redireciona para página de pagamento
+            window.location.href = 'payment.html';
+        }
+
+        // Função para mostrar notificações
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white font-semibold transform translate-x-full transition-transform duration-300`;
+            
+            const colors = {
+                success: 'bg-green-600',
+                error: 'bg-red-600',
+                warning: 'bg-yellow-600',
+                info: 'bg-blue-600'
+            };
+            
+            notification.classList.add(colors[type] || colors.info);
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Anima entrada
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 10);
+            
+            // Remove após 3 segundos
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Função para alternar FAQ
+        function toggleFAQ(faqId) {
+            const content = document.getElementById(faqId + '-content');
+            const icon = document.getElementById(faqId + '-icon');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Fechar carrinho clicando fora
+        document.getElementById('cartModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleCart();
+            }
+        });
+
+        // Inicializar carrinho
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartDisplay();
+        });
+    </script>
 </body>
 </html>

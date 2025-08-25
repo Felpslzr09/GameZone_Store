@@ -12,45 +12,53 @@ let currentPage = 1;
 
 // Mostra/Esconde o "loading"
 function showLoading(show) {
-    // Pega o elemento de loading
     const loading = document.getElementById('loading');
-    // Verifica se o elemento existe
     if (loading) {
-        // Se for para mostrar, remove a classe 'hidden'
         if (show) {
             loading.classList.remove('hidden');
+            loading.style.display = 'flex';
         } else {
-            // Se for para esconder, adiciona a classe 'hidden'
             loading.classList.add('hidden');
+            loading.style.display = 'none';
         }
     }
 }
 
 // Mostra uma mensagem de "toast" (notificação)
 function showToast(message, type = 'success') {
-    // Cria um novo elemento div
+    const toastContainer = document.getElementById('toastContainer');
+    if (!toastContainer) return;
+
     const toast = document.createElement('div');
-    // Adiciona classes ao elemento
-    toast.className = `toast-message ${type}`;
-    // Define o texto da mensagem
-    toast.textContent = message;
-    // Adiciona a mensagem ao corpo do documento
-    document.body.appendChild(toast);
+    const bgColor = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : 'bg-yellow-600';
     
-    // Remove a mensagem após 3 segundos
+    toast.className = `${bgColor} text-white px-6 py-3 rounded-lg shadow-lg mb-2 transform transition-all duration-300 ease-in-out opacity-0 translate-x-full`;
+    toast.textContent = message;
+    
+    toastContainer.appendChild(toast);
+    
+    // Anima a entrada
     setTimeout(() => {
-        document.body.removeChild(toast);
+        toast.classList.remove('opacity-0', 'translate-x-full');
+    }, 100);
+    
+    // Remove após 3 segundos
+    setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-x-full');
+        setTimeout(() => {
+            if (toastContainer.contains(toast)) {
+                toastContainer.removeChild(toast);
+            }
+        }, 300);
     }, 3000);
 }
 
-// --- Cart Management Functions (Used by both pages, primarily updated on index.html) ---
+// --- Cart Management Functions ---
 // Funções de gerenciamento do carrinho
 
 // Carrega o carrinho do localStorage
 function loadCartFromLocalStorage() {
-    // Pega os dados salvos no localStorage
     const savedCart = localStorage.getItem('gameZoneCart');
-    // Se houver dados, converte de volta para objeto e atribui ao carrinho
     if (savedCart) {
         cart = JSON.parse(savedCart);
     }
@@ -58,153 +66,171 @@ function loadCartFromLocalStorage() {
 
 // Salva o carrinho no localStorage
 function saveCartToLocalStorage() {
-    // Converte o carrinho para string e salva no localStorage
     localStorage.setItem('gameZoneCart', JSON.stringify(cart));
 }
 
 // Atualiza a exibição do carrinho na barra lateral
 function updateCartDisplay() {
-    // Pega os elementos do carrinho
     const cartCount = document.getElementById('cartCount');
     const cartTotal = document.getElementById('cartTotal');
     const cartBody = document.getElementById('cartBody');
     const checkoutBtn = document.getElementById('checkoutBtn');
+    const floatingBtn = document.getElementById('floatingCheckoutBtn');
+    const floatingTotal = document.getElementById('floatingCheckoutTotal');
     
-    // Se não encontrar os elementos, sai da função
-    if (!cartCount || !cartTotal || !cartBody) return;
+    if (!cartCount) return;
 
     // Calcula o total de itens no carrinho
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    // Atualiza o contador de itens
     cartCount.textContent = totalItems;
+    
+    // Mostra/esconde o badge do carrinho
+    if (totalItems > 0) {
+        cartCount.style.display = 'flex';
+    } else {
+        cartCount.style.display = 'none';
+    }
 
     // Calcula o valor total do carrinho
     const total = cart.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
-    // Atualiza o valor total
-    cartTotal.textContent = total.toFixed(2);
+    
+    if (cartTotal) {
+        cartTotal.textContent = total.toFixed(2);
+    }
+
+    // Atualiza botão flutuante
+    if (floatingBtn && floatingTotal) {
+        if (totalItems > 0) {
+            floatingBtn.classList.remove('hidden');
+            floatingTotal.textContent = total.toFixed(2);
+        } else {
+            floatingBtn.classList.add('hidden');
+        }
+    }
 
     // Habilita ou desabilita o botão de checkout
     if (checkoutBtn) {
         checkoutBtn.disabled = cart.length === 0;
+        checkoutBtn.style.opacity = cart.length === 0 ? '0.5' : '1';
     }
 
-    // Se o carrinho estiver vazio, mostra uma mensagem
-    if (cart.length === 0) {
-        cartBody.innerHTML = '<p class="text-gray-400 text-center py-8">Carrinho vazio</p>';
-    } else {
-        // Mapeia os itens do carrinho para HTML e renderiza
-        cartBody.innerHTML = cart.map(item => `
-            <div class="cart-item flex items-center mb-4 pb-4 border-b border-[#0f3460] last:border-b-0">
-                <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
-                <div class="cart-item-details flex-grow">
-                    <h6 class="text-white text-base font-semibold">${item.name}</h6>
-                    <p class="text-gray-400 text-sm">Preço: $${parseFloat(item.price).toFixed(2)}</p>
-                    <p class="text-gray-400 text-sm">Quantidade: ${item.quantity}</p>
+    if (cartBody) {
+        // Se o carrinho estiver vazio, mostra uma mensagem
+        if (cart.length === 0) {
+            cartBody.innerHTML = '<p class="text-gray-400 text-center py-8">Carrinho vazio</p>';
+        } else {
+            // Mapeia os itens do carrinho para HTML e renderiza
+            cartBody.innerHTML = cart.map(item => `
+                <div class="cart-item flex items-center mb-4 p-3 bg-[#1a1a2e] rounded-lg">
+                    <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded mr-3">
+                    <div class="flex-1">
+                        <h6 class="text-white text-sm font-semibold">${item.name}</h6>
+                        <p class="text-[#e94560] font-bold">$${parseFloat(item.price).toFixed(2)}</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="decreaseQuantity(${item.id})" class="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700">-</button>
+                        <span class="text-white font-bold">${item.quantity}</span>
+                        <button onclick="increaseQuantity(${item.id})" class="bg-green-600 text-white px-2 py-1 rounded text-xs hover:bg-green-700">+</button>
+                    </div>
                 </div>
-                <button class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition duration-200" onclick="removeFromCart(${item.id})">
-                    Remover
-                </button>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
 }
 
 // Adiciona um jogo ao carrinho
 function addToCart(gameId) {
-    // Encontra o jogo pelo ID
     const game = games.find(g => g.id === gameId);
-    // Se o jogo não for encontrado, sai
     if (!game) return;
 
-    // Verifica se o item já existe no carrinho
     const existingItem = cart.find(item => item.id === gameId);
-    // Se existir, aumenta a quantidade
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
-        // Se não existir, adiciona um novo item com quantidade 1
         cart.push({ ...game, quantity: 1 });
     }
 
-    // Salva o carrinho e atualiza a exibição
     saveCartToLocalStorage();
     updateCartDisplay();
-    // Mostra uma notificação
     showToast(`${game.name} adicionado ao carrinho!`);
 }
 
-// Remove um jogo do carrinho
+// Remove um jogo do carrinho completamente
 function removeFromCart(gameId) {
-    // Filtra o carrinho para remover o item com o ID
     cart = cart.filter(item => item.id !== gameId);
-    // Salva o carrinho e atualiza a exibição
     saveCartToLocalStorage();
     updateCartDisplay();
+    showToast('Item removido do carrinho!', 'error');
+}
+
+// Aumenta a quantidade de um item
+function increaseQuantity(gameId) {
+    const item = cart.find(item => item.id === gameId);
+    if (item) {
+        item.quantity += 1;
+        saveCartToLocalStorage();
+        updateCartDisplay();
+    }
+}
+
+// Diminui a quantidade de um item
+function decreaseQuantity(gameId) {
+    const item = cart.find(item => item.id === gameId);
+    if (item) {
+        if (item.quantity > 1) {
+            item.quantity -= 1;
+        } else {
+            removeFromCart(gameId);
+            return;
+        }
+        saveCartToLocalStorage();
+        updateCartDisplay();
+    }
 }
 
 // Alterna a visibilidade da barra lateral do carrinho
 function toggleCart() {
-    // Pega o elemento da barra lateral
     const cartSidebar = document.getElementById('cartSidebar');
-    // Alterna a classe 'open'
-    if (cartSidebar) cartSidebar.classList.toggle('open');
+    if (cartSidebar) {
+        cartSidebar.classList.toggle('translate-x-full');
+    }
 }
 
-
 // --- Main Page (index.html) Specific Functions ---
-// Funções específicas da página principal (index.html)
 
 // Busca jogos na API RAWG
-async function fetchRawgGames(page = 1, page_size = 20) {
-    // Monta a URL da API
+async function fetchRawgGames(page = 1, page_size = 40) {
     const url = `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${page_size}&ordering=-rating`;
-    // Faz a requisição
     const response = await fetch(url);
-    // Se a resposta não for OK, lança um erro
     if (!response.ok) throw new Error("Falha ao buscar jogos da RAWG");
-    // Converte a resposta para JSON
     const data = await response.json();
-    // Retorna os resultados da busca
     return data.results;
 }
 
 // Carrega os jogos da API RAWG
 async function loadGames(reset = false) {
     try {
-        // Mostra o loading
         showLoading(true);
-        // Busca os jogos na API
         const rawgGames = await fetchRawgGames(currentPage);
-        // Mapeia os dados da API para um formato mais simples
         const newGames = rawgGames.map((game) => ({
             id: game.id,
             name: game.name,
-            // Gera um preço aleatório
             price: (Math.random() * (70 - 10) + 10).toFixed(2),
-            // Pega a imagem ou usa um placeholder
             image: game.background_image || `https://placehold.co/400x250/0f3460/e0e0e0?text=GameZone+Store`,
-            // Pega a descrição, limitando o tamanho
             description: game.description_raw ? game.description_raw.substring(0, 100) + '...' : 'Descrição não disponível',
-            // Pega o gênero
             genre: game.genres?.[0]?.name || 'Casual'
         }));
         
-        // Se for para resetar, substitui a lista de jogos
         if (reset) {
             games = [...newGames];
         } else {
-            // Se não, adiciona os novos jogos à lista existente
             games = [...games, ...newGames];
         }
         
-        // Renderiza os jogos filtrados
         renderGames(getFilteredGames());
-        // Atualiza a contagem de jogos
         updateGameCount();
-        // Esconde o loading
         showLoading(false);
     } catch (error) {
-        // Em caso de erro, exibe uma mensagem
         console.error('Erro ao carregar jogos:', error);
         showToast('Não foi possível carregar os jogos. Tente novamente.', 'error');
         showLoading(false);
@@ -213,49 +239,41 @@ async function loadGames(reset = false) {
 
 // Renderiza os cards dos jogos
 function renderGames(gamesToRender) {
-    // Pega o contêiner dos jogos
     const container = document.getElementById('gamesContainer');
-    // Se o contêiner não existir, sai
     if (!container) return;
     
-    // Limpa o conteúdo atual
     container.innerHTML = '';
     
-    // Se não houver jogos para renderizar, mostra uma mensagem
     if (gamesToRender.length === 0) {
         container.innerHTML = '<div class="col-span-full text-center text-gray-400 py-8">Nenhum jogo encontrado com os filtros aplicados.</div>';
         return;
     }
 
-    // Itera sobre a lista de jogos e cria o HTML para cada um
     gamesToRender.forEach(game => {
         const gameCardHtml = `
-            <div class="game-card bg-[#0f3460] rounded-xl shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
+            <div class="game-card bg-[#16213e] rounded-xl shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                 <img src="${game.image}" alt="${game.name}" class="w-full h-48 object-cover rounded-t-xl">
                 <div class="game-card-body p-5">
-                    <h3 class="game-card-title text-xl font-bold text-white mb-2">${game.name}</h3>
-                    <p class="game-card-genre text-gray-400 text-sm mb-4">${game.genre}</p>
+                    <h3 class="game-card-title text-lg font-bold text-white mb-2">${game.name}</h3>
+                    <p class="game-card-genre text-gray-400 text-sm mb-2">${game.genre}</p>
+                    <p class="text-gray-300 text-xs mb-4">${game.description}</p>
                     <div class="flex justify-between items-center">
-                        <span class="game-card-price text-2xl font-extrabold text-[#e94560]">$${parseFloat(game.price).toFixed(2)}</span>
-                        <button class="add-to-cart-btn bg-[#e94560] text-white px-5 py-2 rounded-full hover:bg-[#c73a50] transition duration-200" onclick="addToCart(${game.id})">
-                            <i class="fas fa-cart-plus"></i>
+                        <span class="game-card-price text-xl font-extrabold text-[#e94560]">$${parseFloat(game.price).toFixed(2)}</span>
+                        <button class="add-to-cart-btn bg-[#e94560] text-white px-4 py-2 rounded-lg hover:bg-[#c73a50] transition duration-200 flex items-center" onclick="addToCart(${game.id})">
+                            <i class="fas fa-shopping-cart mr-2"></i>Adicionar
                         </button>
                     </div>
                 </div>
             </div>
         `;
-        // Adiciona o HTML ao contêiner
         container.innerHTML += gameCardHtml;
     });
-    // Atualiza a contagem de jogos
     updateGameCount();
 }
 
 // Atualiza a contagem de jogos na página
 function updateGameCount() {
-    // Pega o elemento de contagem
     const gameCountElement = document.getElementById('gameCount');
-    // Se existir, atualiza o texto com o número de jogos filtrados
     if (gameCountElement) {
         gameCountElement.textContent = `${getFilteredGames().length} jogos encontrados`;
     }
@@ -263,24 +281,20 @@ function updateGameCount() {
 
 // Retorna a lista de jogos filtrados
 function getFilteredGames() {
-    // Pega o valor da busca e os gêneros selecionados
     const searchInput = document.getElementById('searchInput')?.value.toLowerCase() || '';
     const selectedGenres = Array.from(document.querySelectorAll('.filter-category input[type="checkbox"]:checked'))
         .map(cb => cb.value.toLowerCase());
     
-    // Filtra os jogos pelo nome ou descrição
     let filtered = games.filter(game => 
         game.name.toLowerCase().includes(searchInput) ||
         game.description.toLowerCase().includes(searchInput)
     );
     
-    // Se houver gêneros selecionados, filtra também por gênero
     if (selectedGenres.length > 0) {
         filtered = filtered.filter(game => 
             selectedGenres.some(genre => game.genre.toLowerCase().includes(genre))
         );
     }
-    // Retorna a lista filtrada
     return filtered;
 }
 
@@ -291,32 +305,23 @@ function filterGames() {
 
 // Limpa todos os filtros
 function clearFilters() {
-    // Limpa o campo de busca
     document.getElementById('searchInput').value = '';
-    // Desmarca todos os checkboxes de filtro
     document.querySelectorAll('.filter-category input[type="checkbox"]').forEach(cb => cb.checked = false);
-    // Renderiza todos os jogos (sem filtro)
     renderGames(games);
-    // Atualiza a contagem
     updateGameCount();
 }
 
 // Carrega mais jogos
 async function loadMoreGames() {
-    // Pega o botão de "carregar mais"
     const loadMoreBtn = document.getElementById('loadMoreBtn');
-    // Desabilita o botão e mostra um spinner
     if (loadMoreBtn) {
         loadMoreBtn.disabled = true;
         loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Carregando...';
     }
     
-    // Incrementa o número da página
     currentPage++;
-    // Carrega os novos jogos
     await loadGames(false);
     
-    // Reabilita o botão e restaura o texto original
     if (loadMoreBtn) {
         loadMoreBtn.disabled = false;
         loadMoreBtn.innerHTML = '<i class="fas fa-plus-circle mr-2"></i>Carregar Mais Jogos';
@@ -325,128 +330,185 @@ async function loadMoreGames() {
 
 // Inicializa a página principal (index.html)
 async function initializeHomePage() {
-    // Carrega o carrinho do localStorage
     loadCartFromLocalStorage();
-    // Mostra o loading
     showLoading(true);
-    // Carrega os jogos iniciais
     await loadGames(true);
-    // Atualiza a exibição do carrinho
     updateCartDisplay();
-    // Esconde o loading
     showLoading(false);
 }
 
 // --- Payment Page (payment.html) Specific Functions ---
-// Funções específicas da página de pagamento (payment.html)
 
 // Atualiza o resumo do pagamento
 function updatePaymentSummary() {
-    // Pega os elementos do resumo
     const paymentSummary = document.getElementById('paymentSummary');
     const paymentTotal = document.getElementById('paymentTotal');
+    const emptyCartMessage = document.getElementById('emptyCartMessage');
+    const paymentButtonContainer = document.getElementById('paymentButtonContainer');
     
-    // Se os elementos não existirem, sai
     if (!paymentSummary || !paymentTotal) return;
 
-    // Calcula o valor total do carrinho
     const total = cart.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
-    // Atualiza o valor total
-    paymentTotal.textContent = total.toFixed(2);
+    paymentTotal.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
 
-    // Se o carrinho estiver vazio, mostra uma mensagem
     if (cart.length === 0) {
+        if (emptyCartMessage) {
+            emptyCartMessage.classList.remove('hidden');
+        }
+        if (paymentButtonContainer) {
+            paymentButtonContainer.classList.add('hidden');
+        }
         paymentSummary.innerHTML = '<p class="text-gray-400 text-center py-8">Nenhum item no carrinho</p>';
     } else {
-        // Mapeia os itens do carrinho para o HTML do resumo
+        if (emptyCartMessage) {
+            emptyCartMessage.classList.add('hidden');
+        }
+        if (paymentButtonContainer) {
+            paymentButtonContainer.classList.remove('hidden');
+        }
         paymentSummary.innerHTML = cart.map(item => `
-            <div class="product-summary-item flex justify-between items-center py-3 border-b border-[#0f3460] last:border-b-0">
-                <span class="text-white text-lg">${item.name} (x${item.quantity})</span>
-                <span class="text-[#e94560] text-lg font-semibold">$${(parseFloat(item.price) * item.quantity).toFixed(2)}</span>
+            <div class="flex justify-between items-center py-3 border-b border-[#0f3460] last:border-b-0">
+                <div class="flex items-center">
+                    <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded mr-3">
+                    <div>
+                        <span class="text-white text-sm font-semibold">${item.name}</span>
+                        <p class="text-gray-400 text-xs">Quantidade: ${item.quantity}</p>
+                    </div>
+                </div>
+                <span class="text-[#e94560] font-semibold">R$ ${(parseFloat(item.price) * item.quantity).toFixed(2).replace('.', ',')}</span>
             </div>
         `).join('');
     }
 }
 
-// Gera o QR Code para pagamento
-function generateQR() {
-    // Calcula o valor total
-    const total = cart.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
-    // Pega o contêiner do QR Code
+// Função chamada pelo botão "Gerar QR Code PIX"
+function generatePixQR() {
+    const payButton = document.getElementById('payButton');
     const qrContainer = document.getElementById('qrContainer');
-
-    // Se o contêiner não existir, sai
-    if (!qrContainer) return;
-
-    // Se o total for zero, mostra um placeholder
+    const qrTotal = document.getElementById('qrTotal');
+    
+    if (!qrContainer || !payButton) return;
+    
+    const total = cart.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
+    
     if (total === 0) {
-        qrContainer.innerHTML = `
-            <div class="qr-placeholder text-7xl text-[#e94560] mb-4">
-                <i class="fas fa-qrcode"></i>
-            </div>
-            <p class="text-gray-400 text-lg">Seu carrinho está vazio para gerar o QR Code.</p>
-        `;
+        showToast('Carrinho vazio! Adicione itens para gerar o QR Code.', 'error');
         return;
     }
-
-    // Monta os dados para o QR Code
-    const qrData = `GameZone Store - Total: $${total.toFixed(2)} - Items: ${cart.length}`;
-    // Monta a URL da API de QR Code
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}`;
     
-    // Renderiza o QR Code
-    qrContainer.innerHTML = `
-        <div class="text-center">
-            <img src="${qrUrl}" alt="QR Code para pagamento" class="mx-auto mb-4 rounded-lg shadow-md" style="border: 2px solid #e94560;">
-            <p class="text-green-400 text-xl font-bold">Total: $${total.toFixed(2)}</p>
-            <p class="text-gray-400 text-sm">Escaneie para pagar via Pix</p>
-        </div>
-    `;
+    // Esconde o botão de pagamento
+    payButton.parentElement.style.display = 'none';
+    
+    // Atualiza o total no QR
+    if (qrTotal) {
+        qrTotal.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+    
+    // Gera o QR Code usando a biblioteca QRCode.js
+    const canvas = document.getElementById('qrCanvas');
+    if (canvas && typeof QRCode !== 'undefined') {
+        const qrData = `PIX - GameZone Store - Total: R$ ${total.toFixed(2)} - Itens: ${cart.length}`;
+        QRCode.toCanvas(canvas, qrData, {
+            width: 256,
+            height: 256,
+            color: {
+                dark: '#000000',
+                light: '#FFFFFF'
+            }
+        }, function (error) {
+            if (error) {
+                console.error(error);
+                // Fallback para API externa se a biblioteca não funcionar
+                generateQRFallback();
+            }
+        });
+    } else {
+        // Fallback para API externa
+        generateQRFallback();
+    }
+    
+    // Mostra o container do QR Code
+    qrContainer.classList.remove('hidden');
+    
+    showToast('QR Code PIX gerado com sucesso!', 'success');
+}
+
+// Fallback para gerar QR Code com API externa
+function generateQRFallback() {
+    const total = cart.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
+    const qrData = `PIX - GameZone Store - Total: R$ ${total.toFixed(2)} - Itens: ${cart.length}`;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodeURIComponent(qrData)}`;
+    
+    const canvas = document.getElementById('qrCanvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.onload = function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, 256, 256);
+        };
+        img.src = qrUrl;
+    }
+}
+
+// Gera novo QR Code
+function generateNewQR() {
+    const canvas = document.getElementById('qrCanvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    showToast('Gerando novo QR Code...', 'info');
+    
+    setTimeout(() => {
+        generatePixQR();
+    }, 1000);
 }
 
 // Simula o pagamento
 function simulatePayment() {
-    // Mostra uma notificação de sucesso
-    showToast('Pagamento realizado com sucesso! 🎉', 'success');
-    // Esvazia o carrinho
-    cart = [];
-    // Remove o carrinho do localStorage
-    localStorage.removeItem('gameZoneCart');
+    const successModal = document.getElementById('successModal');
     
-    // Redireciona para a página principal após 2 segundos
-    setTimeout(() => window.location.href = 'index.html', 2000); 
+    if (successModal) {
+        successModal.classList.remove('hidden');
+        successModal.classList.add('flex');
+    }
+    
+    showToast('Pagamento realizado com sucesso! 🎉', 'success');
+    
+    // Limpa o carrinho
+    cart = [];
+    localStorage.removeItem('gameZoneCart');
+}
+
+// Vai para home após pagamento
+function goToHome() {
+    window.location.href = 'index.html';
 }
 
 // Inicializa a página de pagamento (payment.html)
 function initializePaymentPage() {
-    // Carrega o carrinho
     loadCartFromLocalStorage();
-    // Se o carrinho estiver vazio, mostra um aviso e redireciona
-    if (cart.length === 0) {
-        showToast('Seu carrinho está vazio.', 'warning');
-        setTimeout(() => window.location.href = 'index.html', 2000);
-        return;
-    }
-    // Atualiza o resumo do pagamento
     updatePaymentSummary();
-    // Gera o QR Code
-    generateQR();
+    
+    // Adiciona event listener para o botão de pagamento
+    const payButton = document.getElementById('payButton');
+    if (payButton) {
+        payButton.onclick = generatePixQR;
+    }
 }
 
 // --- Navigation Functions ---
-// Funções de navegação
 
 // Navega para a página de pagamento
 function goToPayment() {
-    // Se o carrinho estiver vazio, mostra um aviso
     if (cart.length === 0) {
-        showToast('Adicione itens ao carrinho primeiro!', 'warning');
+        showToast('Adicione itens ao carrinho primeiro!', 'error');
         return;
     }
     
-    // Garante que o carrinho mais recente está salvo
     saveCartToLocalStorage();
-    // Redireciona para a página de pagamento
     window.location.href = 'payment.html';
 }
 
@@ -456,29 +518,25 @@ function showHome() {
 }
 
 // --- Event Listeners Setup ---
-// Configuração dos "Event Listeners"
 
-// Configura os ouvintes de eventos
 function setupEventListeners() {
-    // Ouve o clique no documento
+    // Fecha carrinho ao clicar fora
     document.addEventListener('click', function(e) {
         const cartSidebar = document.getElementById('cartSidebar');
         const cartButton = document.querySelector('[onclick="toggleCart()"]');
         
-        // Fecha a barra lateral se o clique for fora dela
-        if (cartSidebar && cartSidebar.classList.contains('open') && 
+        if (cartSidebar && !cartSidebar.classList.contains('translate-x-full') && 
             !cartSidebar.contains(e.target) && 
-            !cartButton.contains(e.target)) {
+            cartButton && !cartButton.contains(e.target)) {
             toggleCart();
         }
     });
 
-    // Ouve o pressionar de tecla no documento
+    // Fecha carrinho com ESC
     document.addEventListener('keydown', function(e) {
-        // Se a tecla for "Escape", fecha a barra lateral
         if (e.key === 'Escape') {
             const cartSidebar = document.getElementById('cartSidebar');
-            if (cartSidebar && cartSidebar.classList.contains('open')) {
+            if (cartSidebar && !cartSidebar.classList.contains('translate-x-full')) {
                 toggleCart();
             }
         }
@@ -486,17 +544,12 @@ function setupEventListeners() {
 }
 
 // --- Main Document Ready Logic ---
-// Lógica principal ao carregar o documento
 document.addEventListener('DOMContentLoaded', function() {
-    // Detecta em qual página estamos
     const currentPath = window.location.pathname;
-    // Se for a página de pagamento, inicializa-a
     if (currentPath.includes('payment.html')) {
         initializePaymentPage();
     } else {
-        // Caso contrário, inicializa a página principal
         initializeHomePage();
     }
-    // Configura os ouvintes de eventos globais
     setupEventListeners();
 });

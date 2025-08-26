@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#1a1a2e] text-[#e0e0e0] font-sans">
+
+    <!-- Barra de navegação -->
+    <nav class="bg-[#16213e] p-4 shadow-lg navbar-custom">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-2xl font-bold flex items-center" href="index.html">
+                <i class="fas fa-gamepad mr-2"></i>GameZone Store
+            </a>
+            <div class="flex items-center space-x-4">
+                <a class="text-white hover:text-[#e94560] px-3 py-2 rounded-md transition duration-200" href="index.html">Home</a>
+                <a class="bg-[#0f3460] text-white px-4 py-2 rounded-full hover:bg-[#23395d] transition duration-200 flex items-center shadow-md" href="payment.html">
+                    <i class="fas fa-credit-card mr-2"></i>Pagamento
+                </a>
+                <a class="bg-[#0f3460] text-white px-4 py-2 rounded-full hover:bg-[#23395d] transition duration-200 flex items-center shadow-md" href="assinatura.html">
+                    <i class="fas fa-star mr-2"></i>Assinatura
+                </a>
+                <button class="relative bg-[#e94560] text-white px-4 py-2 rounded-full hover:bg-[#c73a50] transition duration-200 flex items-center justify-center shadow-md" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span class="cart-badge absolute -top-1 -right-1 bg-white text-[#e94560] rounded-full text-xs w-5 h-5 flex items-center justify-center font-bold" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>  
+    </nav>
+
+    <!-- Seção de Home -->
+    <section id="homeSection" class="py-8 px-4 md:px-8 lg:px-16">
+        <div class="container mx-auto">
+            <!-- Barra de pesquisa -->
+            <div class="flex justify-center mb-8">
+                <div class="search-container relative w-full max-w-xl">
+                    <i class="fas fa-search search-icon absolute left-3 top-1/2 -translate-y-1/2 text-[#e0e0e0]"></i>
+                    <input type="text" class="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0f3460] text-[#e0e0e0] border border-[#1a1a2e] focus:outline-none focus:ring-2 focus:ring-[#e94560] shadow-md transition duration-200" id="searchInput" placeholder="Buscar jogos..." onkeyup="filterGames()">
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Barra lateral de filtro -->
+                <div class="lg:w-1/4">
+                    <div class="filter-sidebar bg-[#16213e] p-6 rounded-xl shadow-lg">
+                        <div class="filter-title text-2xl font-bold text-[#e94560] mb-4 flex items-center">
+                            <i class="fas fa-filter mr-3"></i>Filtrar Jogos
+                        </div>
+                        <div class="mb-6">
+                            <h6 class="text-lg font-semibold mb-3">Tipo de Jogo</h6>
+                            <div class="filter-category text-base">
+                                <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
+                                    <input type="checkbox" value="Action" onchange="filterGames()" class="mr-2 accent-[#e94560]"> Ação
+                                </label>
+                                <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
+                                    <input type="checkbox" value="Adventure" onchange="filterGames()" class="mr-2 accent-[#e94560]"> Aventura
+                                </label>
+                                <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
+                                    <input type="checkbox" value="RPG" onchange="filterGames()" class="mr-2 accent-[#e94560]"> RPG
+                                </label>
+                                <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
+                                    <input type="checkbox" value="Strategy" onchange="filterGames()" class="mr-2 accent-[#e94560]"> Estratégia
+                                </label>
+                                <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
+                                    <input type="checkbox" value="Sports" onchange="filterGames()" class="mr-2 accent-[#e94560]"> Esporte
+                                </label>
+                                <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
+                                    <input type="checkbox" value="Shooter" onchange="filterGames()" class="mr-2 accent-[#e94560]"> Tiro
+                                </label>
+                                <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
+                                    <input type="checkbox" value="Racing" onchange="filterGames()" class="mr-2 accent-[#e94560]"> Corrida
+                                </label>
+                                <label class="block mb-2 cursor-pointer hover:text-[#e94560] transition duration-200">
+                                    <input type="checkbox" value="Casual" onchange="filterGames()" class="mr-2 accent-[#e94560]"> Casual
+                                </label>
+                            </div>
+                        </div>
+                        <button class="bg-gray-700 text-white w-full py-3 rounded-lg hover:bg-gray-600 transition duration-200 shadow-md" onclick="clearFilters()">
+                            <i class="fas fa-eraser mr-2"></i>Limpar Filtros
+                        </button>
+                    </div>
+
+                    <!-- Seção de redes sociais -->
+                    <div class="social-section bg-[#16213e] p-6 rounded-xl shadow-lg mt-8 text-center">
+                        <h6 class="text-lg font-semibold mb-4">Siga-nos nas Redes Sociais</h6>
+                        <div class="flex justify-center space-x-5">
+                            <a href="#" class="social-icon text-[#e0e0e0] hover:text-[#e94560] text-3xl transition duration-200">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon text-[#e0e0e0] hover:text-[#e94560] text-3xl transition duration-200">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon text-[#e0e0e0] hover:text-[#e94560] text-3xl transition duration-200">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon text-[#e0e0e0] hover:text-[#e94560] text-3xl transition duration-200">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catálogo de Jogos -->
+                <div class="lg:w-3/4">
+                    <div class="flex justify-between items-center mb-6">
+                        <h4 class="text-3xl font-bold text-white">Catálogo de Jogos</h4>
+                        <span id="gameCount" class="text-white text-lg font-medium">0 jogos encontrados</span>
+                    </div>
+
+                    <!-- Área de carregamento -->
+                    <div class="loading flex justify-center items-center h-40" id="loading">
+                        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-green-500"></div>
+                        <span class="sr-only">Carregando...</span>
+                    </div>
+
+                    <!-- Contêiner para os cartões dos jogos -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="gamesContainer">
+                        <!-- Os jogos serão carregados dinamicamente aqui via JavaScript -->
+                    </div>
+
+                    <!-- Botão para carregar mais jogos -->
+                    <div class="flex justify-center mt-8">
+                        <button class="bg-[#e94560] text-white px-6 py-3 rounded-lg hover:bg-[#c73a50] transition duration-200 shadow-lg text-lg font-semibold" onclick="loadMoreGames()" id="loadMoreBtn">
+                            <i class="fas fa-plus-circle mr-2"></i>Carregar Mais Jogos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barra lateral do Carrinho de Compras -->
+    <div class="cart-sidebar fixed right-0 top-0 h-full w-80 bg-[#16213e] shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col z-50" id="cartSidebar">
+        <div class="cart-header flex justify-between items-center p-6 bg-[#1a1a2e] text-white border-b border-[#0f3460]">
+            <h5 class="text-xl font-bold flex items-center"><i class="fas fa-shopping-cart mr-3"></i>Carrinho</h5>
+            <button class="text-white hover:text-gray-300 text-2xl" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-body flex-grow p-6 overflow-y-auto text-[#e0e0e0]" id="cartBody">
+            <p class="text-gray-400 text-center py-8">Carrinho vazio</p>
+        </div>
+        <div class="cart-footer p-6 bg-[#1a1a2e] border-t border-[#0f3460]">
+            <div class="flex justify-between items-center text-2xl font-bold mb-6">
+                <span class="text-white">Total:</span>
+                <span class="text-[#e94560]">R$<span id="cartTotal">0.00</span></span>
+            </div>
+            <button class="bg-[#e94560] text-white w-full py-4 rounded-xl hover:bg-[#c73a50] transition duration-200 shadow-lg text-lg font-semibold flex items-center justify-center" onclick="goToPayment()" disabled id="checkoutBtn">
+                <i class="fas fa-credit-card mr-3"></i>Finalizar Compra
+            </button>
+        </div>
+    </div>
+
+    <!-- Botão flutuante para ir ao pagamento -->
+    <button id="floatingCheckoutBtn" class="fixed bottom-8 right-8 bg-[#e94560] text-white p-4 rounded-full shadow-lg hover:bg-[#c73a50] transition duration-300 text-lg font-bold flex items-center space-x-2 z-40 hidden" onclick="goToPayment()">
+        <i class="fas fa-credit-card"></i>
+        <span>Ir para o Pagamento (R$<span id="floatingCheckoutTotal">0.00</span>)</span>
+    </button>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

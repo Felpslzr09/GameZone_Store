@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - GameZone Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.1/qrcode.min.js"></script>
+</head>
+<body class="bg-[#1a1a2e] text-[#e0e0e0] font-sans min-h-screen">
+
+    <!-- Barra de navegação -->
+    <nav class="bg-[#16213e] p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-2xl font-bold flex items-center" href="index.html">
+                <i class="fas fa-gamepad mr-2"></i>GameZone Store
+            </a>
+            <div class="flex items-center space-x-4">
+                <a class="text-white hover:text-[#e94560] px-3 py-2 rounded-md transition duration-200" href="index.html">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Container principal -->
+    <div class="container mx-auto py-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Título da página -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-white mb-2">
+                    <i class="fas fa-credit-card mr-3"></i>Pagamento
+                </h1>
+                <p class="text-gray-400">Finalize sua compra</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Resumo do pedido -->
+                <div class="bg-[#16213e] rounded-xl p-6 shadow-lg">
+                    <h2 class="text-2xl font-bold text-[#e94560] mb-6 flex items-center">
+                        <i class="fas fa-receipt mr-3"></i>Resumo do Pedido
+                    </h2>
+                    
+                    <!-- Lista de itens -->
+                    <div id="paymentSummary" class="mb-6">
+                        <!-- Os itens serão carregados aqui via JavaScript -->
+                    </div>
+                    
+                    <!-- Total -->
+                    <div class="border-t border-[#0f3460] pt-4">
+                        <div class="flex justify-between items-center text-2xl font-bold">
+                            <span class="text-white">Total:</span>
+                            <span class="text-[#e94560]" id="paymentTotal">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de pagamento -->
+                <div class="bg-[#16213e] rounded-xl p-6 shadow-lg">
+                    <h2 class="text-2xl font-bold text-[#e94560] mb-6 flex items-center">
+                        <i class="fas fa-qrcode mr-3"></i>Pagamento via PIX
+                    </h2>
+                    
+                    <!-- Botão de pagamento -->
+                    <div class="text-center mb-6" id="paymentButtonContainer">
+                        <button id="payButton" class="bg-[#e94560] text-white px-8 py-4 rounded-xl text-xl font-semibold hover:bg-[#c73a50] transition duration-200 shadow-lg">
+                            <i class="fas fa-mobile-alt mr-3"></i>Gerar QR Code PIX
+                        </button>
+                    </div>
+
+                    <!-- Container do QR Code -->
+                    <div id="qrContainer" class="text-center hidden">
+                        <div class="bg-white p-4 rounded-xl inline-block mb-4">
+                            <canvas id="qrCanvas" width="256" height="256"></canvas>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-green-400 text-xl font-bold mb-2">
+                                <i class="fas fa-check-circle mr-2"></i>QR Code Gerado!
+                            </p>
+                            <p class="text-gray-400 mb-4">Escaneie com seu celular para pagar</p>
+                            <p class="text-[#e94560] text-lg font-semibold mb-4">
+                                Total: <span id="qrTotal">R$ 0,00</span>
+                            </p>
+                            
+                            <!-- Botões de ação -->
+                            <div class="flex flex-col gap-3">
+                                <button onclick="simulatePayment()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-200">
+                                    <i class="fas fa-check mr-2"></i>Simular Pagamento Concluído
+                                </button>
+                                <button onclick="generateNewQR()" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-200">
+                                    <i class="fas fa-sync-alt mr-2"></i>Gerar Novo QR Code
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mensagem de carrinho vazio -->
+                    <div id="emptyCartMessage" class="text-center text-gray-400 hidden">
+                        <i class="fas fa-shopping-cart text-6xl mb-4 opacity-50"></i>
+                        <h3 class="text-xl font-semibold mb-2">Carrinho Vazio</h3>
+                        <p class="mb-4">Adicione alguns jogos ao seu carrinho para continuar</p>
+                        <a href="index.html" class="bg-[#e94560] text-white px-6 py-3 rounded-lg hover:bg-[#c73a50] transition duration-200 inline-block">
+                            <i class="fas fa-gamepad mr-2"></i>Ver Jogos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50"></div>
+
+    <!-- Modal de sucesso -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-[#16213e] rounded-xl p-8 max-w-md mx-4 text-center">
+            <div class="text-green-400 text-6xl mb-4">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">Pagamento Aprovado!</h3>
+            <p class="text-gray-400 mb-6">Obrigado pela sua compra. Você será redirecionado em alguns segundos...</p>
+            <div class="flex gap-3">
+                <button onclick="goToHome()" class="flex-1 bg-[#e94560] text-white px-<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - GameZone Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.1/qrcode.min.js"></script>
+</head>
+<body class="bg-[#1a1a2e] text-[#e0e0e0] font-sans min-h-screen">
+
+    <!-- Barra de navegação -->
+    <nav class="bg-[#16213e] p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-2xl font-bold flex items-center" href="index.html">
+                <i class="fas fa-gamepad mr-2"></i>GameZone Store
+            </a>
+            <div class="flex items-center space-x-4">
+                <a class="text-white hover:text-[#e94560] px-3 py-2 rounded-md transition duration-200" href="index.html">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Container principal -->
+    <div class="container mx-auto py-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Título da página -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-white mb-2">
+                    <i class="fas fa-credit-card mr-3"></i>Pagamento
+                </h1>
+                <p class="text-gray-400">Finalize sua compra</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Resumo do pedido -->
+                <div class="bg-[#16213e] rounded-xl p-6 shadow-lg">
+                    <h2 class="text-2xl font-bold text-[#e94560] mb-6 flex items-center">
+                        <i class="fas fa-receipt mr-3"></i>Resumo do Pedido
+                    </h2>
+                    
+                    <!-- Lista de itens -->
+                    <div id="paymentSummary" class="mb-6">
+                        <!-- Os itens serão carregados aqui via JavaScript -->
+                    </div>
+                    
+                    <!-- Total -->
+                    <div class="border-t border-[#0f3460] pt-4">
+                        <div class="flex justify-between items-center text-2xl font-bold">
+                            <span class="text-white">Total:</span>
+                            <span class="text-[#e94560]" id="paymentTotal">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de pagamento -->
+                <div class="bg-[#16213e] rounded-xl p-6 shadow-lg">
+                    <h2 class="text-2xl font-bold text-[#e94560] mb-6 flex items-center">
+                        <i class="fas fa-qrcode mr-3"></i>Pagamento via PIX
+                    </h2>
+                    
+                    <!-- Botão de pagamento -->
+                    <div class="text-center mb-6" id="paymentButtonContainer">
+                        <button id="payButton" class="bg-[#e94560] text-white px-8 py-4 rounded-xl text-xl font-semibold hover:bg-[#c73a50] transition duration-200 shadow-lg">
+                            <i class="fas fa-mobile-alt mr-3"></i>Gerar QR Code PIX
+                        </button>
+                    </div>
+
+                    <!-- Container do QR Code -->
+                    <div id="qrContainer" class="text-center hidden">
+                        <div class="bg-white p-4 rounded-xl inline-block mb-4">
+                            <canvas id="qrCanvas" width="256" height="256"></canvas>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-green-400 text-xl font-bold mb-2">
+                                <i class="fas fa-check-circle mr-2"></i>QR Code Gerado!
+                            </p>
+                            <p class="text-gray-400 mb-4">Escaneie com seu celular para pagar</p>
+                            <p class="text-[#e94560] text-lg font-semibold mb-4">
+                                Total: <span id="qrTotal">R$ 0,00</span>
+                            </p>
+                            
+                            <!-- Botões de ação -->
+                            <div class="flex flex-col gap-3">
+                                <button onclick="simulatePayment()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-200">
+                                    <i class="fas fa-check mr-2"></i>Simular Pagamento Concluído
+                                </button>
+                                <button onclick="generateNewQR()" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-200">
+                                    <i class="fas fa-sync-alt mr-2"></i>Gerar Novo QR Code
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mensagem de carrinho vazio -->
+                    <div id="emptyCartMessage" class="text-center text-gray-400 hidden">
+                        <i class="fas fa-shopping-cart text-6xl mb-4 opacity-50"></i>
+                        <h3 class="text-xl font-semibold mb-2">Carrinho Vazio</h3>
+                        <p class="mb-4">Adicione alguns jogos ao seu carrinho para continuar</p>
+                        <a href="index.html" class="bg-[#e94560] text-white px-6 py-3 rounded-lg hover:bg-[#c73a50] transition duration-200 inline-block">
+                            <i class="fas fa-gamepad mr-2"></i>Ver Jogos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50"></div>
+
+    <!-- Modal de sucesso -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-[#16213e] rounded-xl p-8 max-w-md mx-4 text-center">
+            <div class="text-green-400 text-6xl mb-4">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">Pagamento Aprovado!</h3>
+            <p class="text-gray-400 mb-6">Obrigado pela sua compra. Você será redirecionado em alguns segundos...</p>
+            <div class="flex gap-3">
+                <button onclick="goToHome()" class="flex-1 bg-[#e94560] text-white px-4 py-2 rounded-lg hover:bg-[#c73a50] transition duration-200">
+                    <i class="fas fa-home mr-2"></i>Ir para Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

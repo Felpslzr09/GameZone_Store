@@ -1,0 +1,271 @@
+/* === Estilo Global GameZone Store === */
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+  background-color: #0f0f1a;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #1a1a2e;
+  padding: 1rem 2rem;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #e94560 !important;
+}
+
+.navbar-nav .nav-link {
+  color: #e0e0e0 !important;
+  margin-left: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #e94560 !important;
+}
+
+/* Containers */
+.container-custom {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Cards */
+.card-custom {
+  background: #1a1a2e;
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem;
+  text-align: center;
+  color: #e0e0e0;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+
+.card-custom:hover {
+  transform: translateY(-5px);
+}
+
+.card-custom h2 {
+  color: #e94560;
+  margin-bottom: 1rem;
+}
+
+/* Botões */
+.btn-custom {
+  background: #e94560;
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.btn-custom:hover {
+  background: #c73a50;
+}
+
+/* Carrinho */
+#carrinho {
+  background: #1a1a2e;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+}
+
+#carrinho h3 {
+  color: #e94560;
+  margin-bottom: 0.5rem;
+}
+
+#itensCarrinho {
+  list-style: none;
+  padding: 0;
+}
+
+#itensCarrinho li {
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+}
+
+/* Payment */
+.payment-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #1a1a2e;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.payment-section h2 {
+  margin-bottom: 1rem;
+  color: #e94560;
+}
+
+#paymentSummary {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+#paymentSummary li {
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+}
+
+#paymentTotal {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+#qrContainer {
+  margin-top: 1rem;
+}
+
+#qrContainer canvas {
+  margin: 0 auto;
+  display: block;
+}
+
+.pix-info {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: #1a1a2e;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background:#0f3460; color:#fff; line-height:1.6; }
+    nav { background:#16213e; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+    nav div { font-size:1.2rem; font-weight:bold; }
+    nav a { color:#fff; text-decoration:none; margin-left:20px; font-weight:bold; transition:0.3s; }
+    nav a:hover { color:#e94560; }
+    h1 { text-align:center; margin:20px 0; font-size:2.5rem; }
+    .plans-container { display:flex; flex-wrap:wrap; justify-content:center; gap:30px; padding:0 20px 40px; }
+    .card { background:#054696; border-radius:12px; padding:25px; width:300px; text-align:center; box-shadow:0 6px 12px rgba(0,0,0,0.4); transition:0.3s; position:relative; }
+    .card:hover { transform:translateY(-5px); box-shadow:0 10px 20px #16213e; }
+    .card h2 { margin-bottom:10px; font-size:1.5rem; }
+    .card p { margin-bottom:20px; }
+    .card button { background:linear-gradient(to right,#e94560,#cc0000); border:none; padding:12px 25px; color:#fff; font-size:16px; border-radius:8px; cursor:pointer; transition:0.3s; }
+    .card button:hover { background:linear-gradient(to right,#e94560); }
+    .recomendado::after { content:"★ RECOMENDADO"; position:absolute; top:-10px; right:-10px; background:#e94560; color:#fff; padding:6px 12px; font-size:0.8rem; font-weight:bold; border-radius:5px; transform:rotate(5deg);}
+    #carrinho { background:#054696; padding:15px 20px; margin:20px auto; width:90%; max-width:600px; border-radius:10px; box-shadow:0 6px 12px rgba(0,0,0,0.4); }
+    #carrinho h3 { margin-bottom:10px; }
+    #itensCarrinho li { margin-bottom:5px; }
+    .voltar { color:#e94560; text-decoration:none; display:block; text-align:center; margin:30px 0; font-weight:bold; }
+    .voltar:hover { text-decoration:underline; }
+    @media(max-width:768px){ .plans-container{flex-direction:column; align-items:center;} }
+    /* ===== Estilo Geral ===== */
+body {
+  background-color: #0f0f1a; /* fundo escuro */
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  background-color: #1a1a2e;
+  padding: 1rem;
+}
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: #fff !important;
+}
+.navbar .nav-link:hover {
+  color: #e94560 !important;
+}
+
+/* ===== Container Principal ===== */
+.container-custom {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* ===== Carrinho ===== */
+#carrinho {
+  background: #1a1a2e;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  margin-bottom: 2rem;
+}
+#carrinho h3 {
+  color: #e94560;
+}
+#carrinho ul {
+  list-style: none;
+  padding: 0;
+}
+#carrinho li {
+  padding: 4px 0;
+  border-bottom: 1px solid #333;
+}
+
+/* ===== Cards ===== */
+.card-custom {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+.card-custom:hover {
+  transform: scale(1.05);
+}
+
+/* ===== Botões ===== */
+.btn-custom {
+  background: #e94560;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+.btn-custom:hover {
+  background: #c73a50;
+}
+
+/* ===== Rodapé ===== */
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: #1a1a2e;
+  color: #aaa;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,732 @@
+{
+  "id": "0e32af7a-53b9-48b8-9bef-fe7f618fede6",
+  "version": "2.0",
+  "name": "Pontos criticos",
+  "url": "http://127.0.0.1:5500",
+  "tests": [{
+    "id": "050c67d8-31a7-4fcd-8de9-918dd38e7dd0",
+    "name": "Primeiro_Teste",
+    "commands": [{
+      "id": "5bae7a21-2585-426b-9c01-503c620e0230",
+      "comment": "",
+      "command": "open",
+      "target": "/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "89225862-2764-4fb5-9685-91bfc1634c30",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "713a4cfd-df1d-4af4-8014-bb0ced769f79",
+      "comment": "",
+      "command": "click",
+      "target": "css=.game-card:nth-child(3) .bg-\\[\\#e94560\\]",
+      "targets": [
+        ["css=.game-card:nth-child(3) .bg-\\[\\#e94560\\]", "css:finder"],
+        ["xpath=//button[@onclick='addToCart(54751)']", "xpath:attributes"],
+        ["xpath=//div[@id='gamesContainer']/div[3]/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c9cde248-53fd-4dff-95d1-7dd38fcba531",
+    "name": "Primeiro_Teste2",
+    "commands": [{
+      "id": "7650c4d2-f854-4ca9-98bc-ee5e93484dc8",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f3ca52e5-0e71-4f13-bdaa-64645f309d07",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1094x698",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "17dac598-22eb-4e0b-b92f-802fd221fcb8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative > .fa-shopping-cart",
+      "targets": [
+        ["css=.relative > .fa-shopping-cart", "css:finder"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "06a72fb5-3c33-460a-8c76-6db16d8a0be7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-red-600",
+      "targets": [
+        ["css=.bg-red-600", "css:finder"],
+        ["xpath=//button[@onclick='decreaseQuantity(54751)']", "xpath:attributes"],
+        ["xpath=//div[@id='cartBody']/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'-')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "add05790-9c43-4ead-8caf-3deabf9234be",
+    "name": "Primeiro_Teste3",
+    "commands": [{
+      "id": "ddc6b587-47b9-47e3-a5a1-5ec5b73577b6",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "feefcbbf-f4d9-488a-ab2c-d8bbf803c9bc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a7da2b5e-50fc-4f7a-8fac-bea5954ab6d3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.game-card:nth-child(3) .bg-\\[\\#e94560\\]",
+      "targets": [
+        ["css=.game-card:nth-child(3) .bg-\\[\\#e94560\\]", "css:finder"],
+        ["xpath=//button[@onclick='addToCart(54751)']", "xpath:attributes"],
+        ["xpath=//div[@id='gamesContainer']/div[3]/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4ab6b6ba-f789-4664-808d-6cf7febdeec6",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.game-card:nth-child(3) .bg-\\[\\#e94560\\]",
+      "targets": [
+        ["css=.game-card:nth-child(3) .bg-\\[\\#e94560\\]", "css:finder"],
+        ["xpath=//button[@onclick='addToCart(54751)']", "xpath:attributes"],
+        ["xpath=//div[@id='gamesContainer']/div[3]/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5117c3d-8e37-4e55-83af-b9e41c4b9d9c",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.game-card:nth-child(3) .bg-\\[\\#e94560\\]",
+      "targets": [
+        ["css=.game-card:nth-child(3) .bg-\\[\\#e94560\\]", "css:finder"],
+        ["xpath=//button[@onclick='addToCart(54751)']", "xpath:attributes"],
+        ["xpath=//div[@id='gamesContainer']/div[3]/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "67724e88-1db2-45b6-8e56-72d14eb82fdd",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative:nth-child(3)",
+      "targets": [
+        ["css=.relative:nth-child(3)", "css:finder"],
+        ["xpath=//button[@onclick='toggleCart()']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'1')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f8d7257-b6f2-401c-a613-2ac043e44f68",
+      "comment": "",
+      "command": "click",
+      "target": "css=.hover\\3A bg-green-700",
+      "targets": [
+        ["css=.hover\\3A bg-green-700", "css:finder"],
+        ["xpath=//button[@onclick='increaseQuantity(54751)']", "xpath:attributes"],
+        ["xpath=//div[@id='cartBody']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "cbca7bee-2659-4994-8225-dc843ad9156d",
+    "name": "Primeiro_Teste4",
+    "commands": [{
+      "id": "634f5865-d4d0-47c2-a22d-a40742e10550",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d7894e55-4943-41fb-a2a4-674228dd4fb1",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1094x698",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c6ac926a-a874-49b9-b6c0-99be8ef85235",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "linkText=Assinatura",
+      "targets": [
+        ["linkText=Assinatura", "linkText"],
+        ["css=.py-2:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(@href, 'assinatura.html')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Assinatura')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a4821df3-dea9-4d8d-a40a-61d03428875d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-home",
+      "targets": [
+        ["css=.fa-home", "css:finder"],
+        ["xpath=//div/div/a/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a4a929e-7609-437e-b20f-ff4158821b0d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-star",
+      "targets": [
+        ["css=.fa-star", "css:finder"],
+        ["xpath=//a[2]/i", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "644adc6a-36d4-4b68-85e8-409027f9866c",
+    "name": "Primeiro_Teste5",
+    "commands": [{
+      "id": "8df3535c-0074-4477-829a-5643bfbe16bb",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f509c594-73b9-4aca-b81a-b9ad8b0e834d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1094x698",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7caf11e8-0c1d-4d00-991a-4512029dc3ca",
+      "comment": "",
+      "command": "click",
+      "target": "css=.relative > .fa-shopping-cart",
+      "targets": [
+        ["css=.relative > .fa-shopping-cart", "css:finder"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a096f004-6560-40b2-884c-9720eddd004e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-times",
+      "targets": [
+        ["css=.fa-times", "css:finder"],
+        ["xpath=//div[@id='cartSidebar']/div/button/i", "xpath:idRelative"],
+        ["xpath=//body/div/div/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fda3e544-79c0-49d9-b442-3ede7dd319a8",
+    "name": "Primeiro_Teste6",
+    "commands": [{
+      "id": "173b0962-676d-42d9-ae84-19f8444fab7a",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2d0782ad-e8a4-479c-92ab-e3d0e88b3f3f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1094x698",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "945c1bdc-21f6-40c9-9a12-319bfa1fe247",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,7477)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2ebab947-61be-4ce9-b410-9d3004decfce",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,10071)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4c414ba5-8260-4e6d-8edb-4aa057c6028a",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "id=loadMoreBtn",
+      "targets": [
+        ["id=loadMoreBtn", "id"],
+        ["css=#loadMoreBtn", "css:finder"],
+        ["xpath=//button[@id='loadMoreBtn']", "xpath:attributes"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Carregando mais jogos...')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "16a9e9b9-82f6-4eb1-b9c8-6ced5747aecf",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "id=loadMoreBtn",
+      "targets": [
+        ["id=loadMoreBtn", "id"],
+        ["css=#loadMoreBtn", "css:finder"],
+        ["xpath=//button[@id='loadMoreBtn']", "xpath:attributes"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Descobrir Mais Jogos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6952d5ba-b059-4aa7-afb9-59337055bfaa",
+      "comment": "",
+      "command": "click",
+      "target": "css=.game-card:nth-child(115) > .p-6",
+      "targets": [
+        ["css=.game-card:nth-child(115) > .p-6", "css:finder"],
+        ["xpath=//div[@id='gamesContainer']/div[115]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[115]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f31efe8-f757-49b5-ae47-21663c1c886e",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.game-card:nth-child(115) > .p-6",
+      "targets": [
+        ["css=.game-card:nth-child(115) > .p-6", "css:finder"],
+        ["xpath=//div[@id='gamesContainer']/div[115]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[115]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "18ffbed9-99b7-457d-b07c-c596ed414ba4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.game-card:nth-child(147)",
+      "targets": [
+        ["css=.game-card:nth-child(147)", "css:finder"],
+        ["xpath=//div[@id='gamesContainer']/div[147]", "xpath:idRelative"],
+        ["xpath=//div[147]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d3a9c2f8-49c4-4999-a07d-cb0ebeef4f4c",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "id=loadMoreBtn",
+      "targets": [
+        ["id=loadMoreBtn", "id"],
+        ["css=#loadMoreBtn", "css:finder"],
+        ["xpath=//button[@id='loadMoreBtn']", "xpath:attributes"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Carregando mais jogos...')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "482a7a2b-399f-4ace-8372-32116b0ffa03",
+      "comment": "",
+      "command": "click",
+      "target": "id=gamesContainer",
+      "targets": [
+        ["id=gamesContainer", "id"],
+        ["css=#gamesContainer", "css:finder"],
+        ["xpath=//div[@id='gamesContainer']", "xpath:attributes"],
+        ["xpath=//div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2be7b8af-13d7-4725-a13d-c5e139826884",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "id=loadMoreBtn",
+      "targets": [
+        ["id=loadMoreBtn", "id"],
+        ["css=#loadMoreBtn", "css:finder"],
+        ["xpath=//button[@id='loadMoreBtn']", "xpath:attributes"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Carregando mais jogos...')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "778b9fe4-caa4-443b-9c0c-965d4f95637c",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "id=loadMoreBtn",
+      "targets": [
+        ["id=loadMoreBtn", "id"],
+        ["css=#loadMoreBtn", "css:finder"],
+        ["xpath=//button[@id='loadMoreBtn']", "xpath:attributes"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Descobrir Mais Jogos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7a3fd083-6542-4b6e-9671-cac39440ea24",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-8",
+      "targets": [
+        ["css=.py-8", "css:finder"],
+        ["xpath=//section[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6ba79cf-9402-4c01-a8db-98d7da5b6f6a",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.py-8",
+      "targets": [
+        ["css=.py-8", "css:finder"],
+        ["xpath=//section[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e7d0b7fb-1def-48e1-9e6c-35f02e9f0a4b",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.game-card:nth-child(223) > .p-6",
+      "targets": [
+        ["css=.game-card:nth-child(223) > .p-6", "css:finder"],
+        ["xpath=//div[@id='gamesContainer']/div[223]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[223]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "467230af-fa6f-43c6-8b2a-0c569910936c",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.py-8",
+      "targets": [
+        ["css=.py-8", "css:finder"],
+        ["xpath=//section[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c22fb4aa-5121-4204-a03b-7898b1589d69",
+      "comment": "",
+      "command": "click",
+      "target": "css=.game-card:nth-child(223) > .p-6",
+      "targets": [
+        ["css=.game-card:nth-child(223) > .p-6", "css:finder"],
+        ["xpath=//div[@id='gamesContainer']/div[223]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[223]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bad63648-ee4b-4597-a36f-2a7e3cb630fa",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.game-card:nth-child(223) > .p-6",
+      "targets": [
+        ["css=.game-card:nth-child(223) > .p-6", "css:finder"],
+        ["xpath=//div[@id='gamesContainer']/div[223]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[223]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0edd89ad-c3e3-4462-acd5-452dc8f5d5a7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.game-card:nth-child(223) > .p-6",
+      "targets": [
+        ["css=.game-card:nth-child(223) > .p-6", "css:finder"],
+        ["xpath=//div[@id='gamesContainer']/div[223]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[223]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3a242edf-1249-4f40-8d03-476812c1558d",
+    "name": "Primeiro_Teste7",
+    "commands": [{
+      "id": "a2637086-a3a8-4a32-8e3b-fb61aa71f635",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6d0ae1db-8491-4e0f-8363-76341e78382b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8c00c099-96bc-42d4-ab4a-94e5233ef61b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cursor-pointer:nth-child(1) > .mr-3",
+      "targets": [
+        ["css=.cursor-pointer:nth-child(1) > .mr-3", "css:finder"],
+        ["xpath=//input[@value='Action']", "xpath:attributes"],
+        ["xpath=//div[@id='genreFilters']/label/input", "xpath:idRelative"],
+        ["xpath=//label/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "299d0dc8-fe71-424f-91c8-35a982645714",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(6) > .mr-3",
+      "targets": [
+        ["css=.flex:nth-child(6) > .mr-3", "css:finder"],
+        ["xpath=//input[@value='Sports']", "xpath:attributes"],
+        ["xpath=//div[@id='genreFilters']/label[6]/input", "xpath:idRelative"],
+        ["xpath=//label[6]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bc0cc51b-8765-456f-9528-f8727cb83356",
+      "comment": "",
+      "command": "click",
+      "target": "css=.hover\\3A bg-gray-500",
+      "targets": [
+        ["css=.hover\\3A bg-gray-500", "css:finder"],
+        ["xpath=//button[@onclick='clearFilters()']", "xpath:attributes"],
+        ["xpath=//div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Limpar Filtros')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1b351d6-7048-45ad-be36-77863d18eaa7",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.hover\\3A bg-gray-500",
+      "targets": [
+        ["css=.hover\\3A bg-gray-500", "css:finder"],
+        ["xpath=//button[@onclick='clearFilters()']", "xpath:attributes"],
+        ["xpath=//div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Limpar Filtros')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e39c1d77-7722-48b4-b5a0-dc412aaeb637",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.hover\\3A bg-gray-500",
+      "targets": [
+        ["css=.hover\\3A bg-gray-500", "css:finder"],
+        ["xpath=//button[@onclick='clearFilters()']", "xpath:attributes"],
+        ["xpath=//div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Limpar Filtros')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "8fffacfd-0373-4814-8342-3bfc6e835541",
+    "name": "Primeiro_Teste8",
+    "commands": [{
+      "id": "7f4598b3-7440-4c7b-af6a-d10e2b5bbd26",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e9e0cb90-6b18-442c-b0ed-0641ab3abe9e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1094x698",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "781b4efb-b26a-4878-8721-ee66675372f0",
+      "comment": "",
+      "command": "click",
+      "target": "id=searchInput",
+      "targets": [
+        ["id=searchInput", "id"],
+        ["css=#searchInput", "css:finder"],
+        ["xpath=//input[@id='searchInput']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40042742-3e50-4fa1-873a-48edcb55c33c",
+      "comment": "",
+      "command": "click",
+      "target": "id=searchInput",
+      "targets": [
+        ["id=searchInput", "id"],
+        ["css=#searchInput", "css:finder"],
+        ["xpath=//input[@id='searchInput']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "861cb8cd-35c9-408e-bb85-6e2f0c62490d",
+      "comment": "",
+      "command": "type",
+      "target": "id=searchInput",
+      "targets": [
+        ["id=searchInput", "id"],
+        ["css=#searchInput", "css:finder"],
+        ["xpath=//input[@id='searchInput']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "rob"
+    }]
+  }, {
+    "id": "634f887d-aa28-4e9e-b2ce-f926089c21f1",
+    "name": "Primeiro_Teste9",
+    "commands": [{
+      "id": "0e98163d-b20f-46c0-b6d7-cb0cc1ca1507",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "994c91bd-bce9-4228-a6ee-d54787a4e8e7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1094x698",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1e28e5b5-330a-4547-8cc1-016f8198f003",
+      "comment": "",
+      "command": "click",
+      "target": "css=.game-card:nth-child(1) .bg-\\[\\#e94560\\]",
+      "targets": [
+        ["css=.game-card:nth-child(1) .bg-\\[\\#e94560\\]", "css:finder"],
+        ["xpath=//button[@onclick='addToCart(25097)']", "xpath:attributes"],
+        ["xpath=//div[@id='gamesContainer']/div/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Comprar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fb1bf84f-a34b-4cd9-8ffa-509393da3714",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.game-card:nth-child(1) .bg-\\[\\#e94560\\]",
+      "targets": [
+        ["css=.game-card:nth-child(1) .bg-\\[\\#e94560\\]", "css:finder"],
+        ["xpath=//button[@onclick='addToCart(25097)']", "xpath:attributes"],
+        ["xpath=//div[@id='gamesContainer']/div/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Comprar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "11b6d24d-f146-436b-94ab-6a3768bf10bc",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.game-card:nth-child(1) .bg-\\[\\#e94560\\]",
+      "targets": [
+        ["css=.game-card:nth-child(1) .bg-\\[\\#e94560\\]", "css:finder"],
+        ["xpath=//button[@onclick='addToCart(25097)']", "xpath:attributes"],
+        ["xpath=//div[@id='gamesContainer']/div/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Comprar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "63254130-4c26-4033-8fe7-b40f8a12c47a",
+      "comment": "",
+      "command": "click",
+      "target": "id=floatingCheckoutBtn",
+      "targets": [
+        ["id=floatingCheckoutBtn", "id"],
+        ["css=#floatingCheckoutBtn", "css:finder"],
+        ["xpath=//button[@id='floatingCheckoutBtn']", "xpath:attributes"],
+        ["xpath=//body/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a1739ec4-b24f-4655-92ec-1bb9a2af005c",
+    "name": "Primeiro_Teste10",
+    "commands": [{
+      "id": "fe4856cd-dcaf-42a9-8aea-81cd344f560e",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "40e6a2ac-514d-460b-a652-93ef6f66c37f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1094x698",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "98729c13-0ceb-4c1c-a64f-15683f9aad89",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-4 > .container",
+      "targets": [
+        ["css=.p-4 > .container", "css:finder"],
+        ["xpath=//div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e4de5286-1fbc-4d86-a9a0-5e738131dd42",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-4 > .container",
+      "targets": [
+        ["css=.p-4 > .container", "css:finder"],
+        ["xpath=//div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "81d435ea-1585-4620-9943-41f8966682dc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.p-4 > .container",
+      "targets": [
+        ["css=.p-4 > .container", "css:finder"],
+        ["xpath=//div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "db7046ad-f551-4122-b00c-0e3d4a5f27f6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.top-0:nth-child(1)",
+      "targets": [
+        ["css=.top-0:nth-child(1)", "css:finder"],
+        ["xpath=//nav", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "23ede6df-bcba-4f96-8e02-e69c6d8861c2",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["050c67d8-31a7-4fcd-8de9-918dd38e7dd0"]
+  }],
+  "urls": ["http://127.0.0.1:5500/"],
+  "plugins": []
+}

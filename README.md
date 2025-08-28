@@ -1,47 +1,52 @@
-Escopo do Projeto
+# 🎮 GameZone Store  
 
-Funcionalidades Principais:
+Um site fictício de e-commerce de jogos digitais, desenvolvido para estudos e prática de programação.  
 
-Catálogo de Jogos: Exibição dos jogos com imagens, descrições e categorias.
+---
 
-Filtros: O usuário poderá filtrar os jogos por tipo, como Ação, Aventura, RPG, Estratégia, etc.
+## 📌 Escopo do Projeto  
 
-Busca de Jogos: O usuário poderá buscar por jogos através de uma barra de pesquisa.
+### ✨ Funcionalidades Principais  
+- **Catálogo de Jogos** → Exibição de jogos com imagens, descrições e categorias.  
+- **Filtros** → O usuário pode filtrar os jogos por tipo (Ação, Aventura, RPG, Estratégia, etc.).  
+- **Busca de Jogos** → Barra de pesquisa para encontrar jogos pelo nome.  
+- **Carrinho de Compras** → Adicionar jogos ao carrinho e visualizar o total da compra.  
+- **Pagamento via QR Code** → Geração de QR Code com os dados da transação.  
+- **Integração com APIs** →  
+  - [RAWG.io](https://rawg.io/apidocs) para buscar dados dos jogos.  
+  - API de QR Code para gerar o código de pagamento.  
 
-Carrinho de Compras: Funcionalidade que permite ao usuário adicionar jogos ao carrinho e visualizar o total da compra.
+---
 
-Pagamento: Integração com QR Code para o pagamento. Ao final do processo de compra, será gerado um QR Code com os dados da transação.
+## 🛠️ Tecnologias Utilizadas  
 
-Integração com APIs: Uso da API RAWG.io para obter dados sobre os jogos e QR Code API para gerar o código de pagamento.
+### Frontend  
+- **HTML5**, **CSS3**, **JavaScript**  
+- [Tailwind CSS](https://tailwindcss.com/) → estilização responsiva  
+- [Font Awesome](https://fontawesome.com/) → ícones  
 
-Tecnologias Utilizadas:
+### Backend / Integrações  
+- **RAWG.io API** → informações sobre jogos  
+- **QR Code API** → geração do código de pagamento  
 
-Frontend:
+### Outras ferramentas  
+- **GitHub** → controle de versão e hospedagem do repositório  
 
-HTML5, CSS3, JavaScript
+---
 
-Framework Tailwind CSS para estilização
+## 🎯 Objetivos  
+- Criar um site funcional que permita **buscar, filtrar, comprar e pagar por jogos online**.  
+- Utilizar **APIs externas** para enriquecer a experiência do usuário.  
+- Aplicar **boas práticas de desenvolvimento** (uso de Git/GitHub, organização de código, versionamento).  
 
-Font Awesome para ícones
+---
 
-Backend:
+## 💡 Motivo do Projeto  
+O projeto nasceu da **paixão por jogos** e do interesse em **explorar conceitos de comércio digital**, unindo diversão e aprendizado em uma aplicação prática.  
 
-API RAWG.io para fornecer informações sobre jogos
+---
 
-API de QR Code para gerar o código de pagamento
-
-Outras ferramentas:
-
-GitHub para controle de versão e repositório
-
-Objetivos:
-
-Criar um site funcional que permita aos usuários buscar, filtrar, comprar e pagar por jogos online.
-
-Utilizar APIs externas para enriquecer a experiência do usuário (RAWG.io para jogos e API de QR Code para pagamento).
-
-Aplicar boas práticas de desenvolvimento, como o uso de Git e GitHub para controle de versão.
-
-Motivo: 
-
-Estamos criando este site porque somos apaixonados por jogos e temos um grande interesse por comércio.
+## 🚀 Como Executar o Projeto  
+1. Clone este repositório:  
+   ```bash
+   git clone https://github.com/seu-usuario/GameZone_Store.git

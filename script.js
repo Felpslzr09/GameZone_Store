@@ -217,22 +217,22 @@ function clearCart() {
 
 // --- API Functions ---
 
-// Busca jogos famosos e bem avaliados
+// Busca jogos famosos
 async function fetchPopularGames(page = 1, page_size = 40) {
     try {
         const currentDate = new Date();
         const lastYear = new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), currentDate.getDate());
-        const twoYearsAgo = new Date(currentDate.getFullYear() - 2, currentDate.getMonth(), currentDate.getDate());
-        
+        const fiveYearsAgo = new Date(currentDate.getFullYear() - 5, currentDate.getMonth(), currentDate.getDate());
+
         const queries = [
-            // Jogos mais bem avaliados de todos os tempos
-            `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${Math.floor(page_size/4)}&ordering=-metacritic&metacritic=80,100`,
-            // Jogos populares recentes
-            `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${Math.floor(page_size/4)}&dates=${twoYearsAgo.toISOString().split('T')[0]},${currentDate.toISOString().split('T')[0]}&ordering=-rating`,
-            // Jogos indie famosos
-            `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${Math.floor(page_size/4)}&genres=indie&ordering=-rating&rating=4,5`,
-            // Jogos AAA populares
-            `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${Math.floor(page_size/4)}&ordering=-added&rating=4,5`
+            // Jogos mais famosos (mais adicionados na RAWG)
+            `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${Math.floor(page_size/3)}&ordering=-added`,
+
+            // Jogos famosos e bem avaliados (rating alto)
+            `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${Math.floor(page_size/3)}&ordering=-rating&rating=4,5`,
+
+            // Jogos famosos lançados nos últimos 5 anos
+            `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${Math.floor(page_size/3)}&dates=${fiveYearsAgo.toISOString().split('T')[0]},${currentDate.toISOString().split('T')[0]}&ordering=-added`
         ];
 
         const responses = await Promise.all(queries.map(url => fetch(url)));
@@ -251,12 +251,13 @@ async function fetchPopularGames(page = 1, page_size = 40) {
     } catch (error) {
         console.error('Erro ao buscar jogos:', error);
         // Fallback para busca simples
-        const response = await fetch(`https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${page_size}&ordering=-rating`);
+        const response = await fetch(`https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${page}&page_size=${page_size}&ordering=-added`);
         if (!response.ok) throw new Error("Falha ao buscar jogos");
         const data = await response.json();
         return data.results;
     }
 }
+
 
 // Carrega jogos da API
 async function loadGames(reset = false) {
@@ -1240,16 +1241,7 @@ function setupEventListeners() {
     genreCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', filterGames);
     });
-    
-    // Scroll infinito (opcional)
-    window.addEventListener('scroll', debounce(function() {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1000) {
-            if (!isLoading && games.length > 0) {
-                loadMoreGames();
-            }
-        }
-    }, 250));
-    
+        
     setupSearch();
     setupCardValidation();
 }
@@ -1308,3 +1300,22 @@ window.downloadReceipt = downloadReceipt;
 window.closeSuccessModal = closeSuccessModal;
 window.sortGames = sortGames;
 window.retryPixPayment = retryPixPayment;
+
+// === CONTROLE DO CARREGAMENTO AUTOMÁTICO E MANUAL ===
+
+// Primeira carga automática (quando abre o site)
+window.addEventListener("DOMContentLoaded", () => {
+    loadGames(true); // carrega a lista inicial de jogos
+});
+
+// Ativa o botão "Descobrir Mais Jogos" para carregar manualmente
+document.addEventListener("DOMContentLoaded", () => {
+    const btnMaisJogos = document.getElementById("btnMaisJogos");
+    if (btnMaisJogos) {
+        btnMaisJogos.addEventListener("click", () => {
+            currentPage++;      // avança a página
+            loadGames(false);   // só carrega mais jogos quando clicar
+        });
+    }
+});
+

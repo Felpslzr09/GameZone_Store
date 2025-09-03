@@ -8,7 +8,6 @@ let currentPage = 1
 let discount = 0
 let isLoading = false
 
-// --- Global Utility Functions ---
 
 function showLoading(show) {
   const loading = document.getElementById("loading")
@@ -1521,6 +1520,10 @@ function initializeApp() {
     loadGames(true)
   }
 
+  if (document.getElementById("salesChart") || document.getElementById("ratingsChart")) {
+    gameAnalytics.init()
+  }
+
   // Configura event listeners
   setupEventListeners()
 
@@ -1561,151 +1564,4 @@ window.closeSuccessModal = closeSuccessModal
 window.sortGames = sortGames
 window.retryPixPayment = retryPixPayment
 window.regeneratePixQR = regeneratePixQR
-
-// === CONTROLE DO CARREGAMENTO AUTOMÁTICO E MANUAL ===
-
-// Primeira carga automática (quando abre o site)
-window.addEventListener("DOMContentLoaded", () => {
-  loadGames(true) // carrega a lista inicial de jogos
-})
-
-// Ativa o botão "Descobrir Mais Jogos" para carregar manualmente
-document.addEventListener("DOMContentLoaded", () => {
-  const btnMaisJogos = document.getElementById("btnMaisJogos")
-  if (btnMaisJogos) {
-    btnMaisJogos.addEventListener("click", () => {
-      currentPage++ // avança a página
-      loadGames(false) // só carrega mais jogos quando clicar
-    })
-  }
-})
-
-// === SISTEMA DE NOTIFICAÇÕES PROMOCIONAIS ===
-
-class PromoNotificationSystem {
-  constructor() {
-    this.notifications = [
-      {
-        id: 1,
-        title: "🔥 Oferta Relâmpago!",
-        message: "Até 70% OFF em jogos selecionados",
-        type: "sale",
-        duration: 8000,
-      },
-      {
-        id: 2,
-        title: "🎮 Novo Lançamento",
-        message: "Confira os jogos mais aguardados do ano",
-        type: "new",
-        duration: 6000,
-      },
-      {
-        id: 3,
-        title: "⭐ Avaliação 5 Estrelas",
-        message: "Jogos com as melhores avaliações da comunidade",
-        type: "featured",
-        duration: 7000,
-      },
-    ]
-    this.currentIndex = 0
-    this.isVisible = false
-    this.interval = null
-  }
-
-  init() {
-    this.createNotificationWidget()
-    this.startRotation()
-  }
-
-  createNotificationWidget() {
-    const widget = document.createElement("div")
-    widget.id = "promoNotification"
-    widget.className =
-      "fixed top-24 right-6 bg-gradient-to-r from-[#e94560] to-[#c73a50] text-white p-4 rounded-2xl shadow-2xl z-40 transform translate-x-full transition-all duration-500 max-w-sm"
-
-    widget.innerHTML = `
-      <div class="flex items-center justify-between">
-        <div class="flex-1">
-          <h4 class="font-bold text-sm mb-1" id="promoTitle"></h4>
-          <p class="text-xs opacity-90" id="promoMessage"></p>
-        </div>
-        <button onclick="promoSystem.hide()" class="ml-3 text-white/80 hover:text-white transition duration-200">
-          <i class="fas fa-times text-sm"></i>
-        </button>
-      </div>
-    `
-
-    document.body.appendChild(widget)
-  }
-
-  show(notification) {
-    const widget = document.getElementById("promoNotification")
-    const title = document.getElementById("promoTitle")
-    const message = document.getElementById("promoMessage")
-
-    if (widget && title && message) {
-      title.textContent = notification.title
-      message.textContent = notification.message
-
-      widget.classList.remove("translate-x-full")
-      this.isVisible = true
-
-      setTimeout(() => {
-        this.hide()
-      }, notification.duration)
-    }
-  }
-
-  hide() {
-    const widget = document.getElementById("promoNotification")
-    if (widget) {
-      widget.classList.add("translate-x-full")
-      this.isVisible = false
-    }
-  }
-
-  startRotation() {
-    // Mostra primeira notificação após 3 segundos
-    setTimeout(() => {
-      this.showNext()
-    }, 2000)
-
-    // Rotaciona notificações a cada 15 segundos
-    this.interval = setInterval(() => {
-      if (!this.isVisible) {
-        this.showNext()
-      }
-    }, 5000)
-  }
-
-  showNext() {
-    const notification = this.notifications[this.currentIndex]
-    this.show(notification)
-    this.currentIndex = (this.currentIndex + 1) % this.notifications.length
-  }
-
-  stop() {
-    if (this.interval) {
-      clearInterval(this.interval)
-      this.interval = null
-    }
-  }
-}
-
-// Inicializa o sistema de notificações promocionais
-const promoSystem = new PromoNotificationSystem()
-
-// Inicializa quando o DOM estiver pronto
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-      promoSystem.init()
-    }, 2000)
-  })
-} else {
-  setTimeout(() => {
-    promoSystem.init()
-  }, 2000)
-}
-
-console.log("🎮 GameZone Store carregado com sistema de notificações promocionais!")
+window.gameAnalytics = gameAnalytics

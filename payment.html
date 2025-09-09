@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pagamento - GameZone Store</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <!-- Removed old qrcode library, now using QR Server API for better performance -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body class="bg-[#1a1a2e] text-[#e0e0e0] font-sans min-h-screen">
+
+        <!-- Navegação -->
+        <nav class="bg-[#16213e] p-4 shadow-2xl sticky top-0 z-40">
+            <div class="container mx-auto flex justify-between items-center">
+                <a class="text-white text-2xl font-bold flex items-center hover:text-[#e94560] transition duration-300" href="index.html">
+                    <i class="fas fa-gamepad mr-3 text-[#e94560]"></i>GameZone Store
+                </a>
+                <div class="flex items-center space-x-4">
+                    <a class="bg-[#e94560] text-white px-4 py-2 rounded-full hover:bg-[#c73a50] transition duration-300 flex items-center shadow-lg font-medium" href="index.html">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a class="bg-[#0f3460] text-white px-4 py-2 rounded-full hover:bg-[#23395d] transition duration-300 flex items-center shadow-lg font-medium" href="assinatura.html">
+                        <i class="fas fa-star mr-2"></i>Assinatura
+                    </a>
+                     <a class="bg-[#0f3460] text-white px-4 py-2 rounded-full hover:bg-[#23395d] transition duration-300 flex items-center shadow-lg font-medium" href="about.html">
+                    <i class="fas fa-info-circle mr-2"></i>Sobre
+                </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Container principal -->
+        <div class="container mx-auto py-8 px-4">
+            <div class="max-w-6xl mx-auto">
+                <!-- Título da página -->
+                <div class="text-center mb-8">
+                    <h1 class="text-5xl font-bold text-white mb-4">
+                        <i class="fas fa-credit-card mr-3 text-[#e94560]"></i>Finalizar Pagamento
+                    </h1>
+                    <p class="text-gray-400 text-xl">Complete sua compra e comece a jogar!</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Resumo do pedido -->
+                    <div class="bg-[#16213e] rounded-2xl p-8 shadow-2xl">
+                        <h2 class="text-3xl font-bold text-[#e94560] mb-6 flex items-center">
+                            <i class="fas fa-receipt mr-3"></i>Resumo do Pedido
+                        </h2>
+                        
+                        <!-- Lista de itens -->
+                        <div id="paymentSummary" class="mb-6 max-h-96 overflow-y-auto">
+                            <!-- Os itens serão carregados aqui via JavaScript -->
+                        </div>
+                        
+                        <!-- Cupom de desconto -->
+                        <div class="border-t border-[#0f3460] pt-6 mb-6">
+                            <h3 class="text-lg font-semibold text-white mb-3">Cupom de Desconto</h3>
+                            <div class="flex space-x-2">
+                                <input type="text" id="couponInput" class="flex-1 bg-[#0f3460] text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="Digite seu cupom">
+                                <button onclick="applyCoupon()" class="bg-[#e94560] text-white px-6 py-2 rounded-lg hover:bg-[#c73a50] transition duration-300 flex items-center shadow-lg font-medium">
+                                    <i class="fas fa-tag mr-2"></i>Aplicar
+                                </button>
+                            </div>
+                            <div id="couponMessage" class="mt-2 text-sm hidden"></div>
+                        </div>
+                        
+                        <!-- Total -->
+                        <div class="border-t border-[#0f3460] pt-6">
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">Subtotal:</span>
+                                    <span class="text-white" id="subtotal">R$ 0,00</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">Desconto:</span>
+                                    <span class="text-green-400" id="discount">- R$ 0,00</span>
+                                </div>
+                                <div class="flex justify-between items-center text-2xl font-bold border-t border-[#0f3460] pt-3">
+                                    <span class="text-white">Total:</span>
+                                    <span class="text-[#e94560]" id="paymentTotal">R$ 0,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Área de pagamento -->
+                    <div class="bg-[#16213e] rounded-2xl p-8 shadow-2xl">
+                        <h2 class="text-3xl font-bold text-[#e94560] mb-6 flex items-center">
+                            <i class="fas fa-credit-card mr-3"></i>Método de Pagamento
+                        </h2>
+                        
+                        <!-- Tabs de pagamento -->
+                        <div class="mb-6">
+                            <div class="flex border-b border-[#0f3460]">
+                                <button class="payment-tab flex-1 py-3 px-4 text-center font-semibold transition duration-200 active" data-method="pix" onclick="switchPaymentMethod('pix')">
+                                    <i class="fas fa-qrcode mr-2"></i>PIX
+                                </button>
+                                <button class="payment-tab flex-1 py-3 px-4 text-center font-semibold transition duration-200" data-method="credit" onclick="switchPaymentMethod('credit')">
+                                    <i class="fas fa-credit-card mr-2"></i>Cartão de Crédito
+                                </button>
+                                <button class="payment-tab flex-1 py-3 px-4 text-center font-semibold transition duration-200" data-method="debit" onclick="switchPaymentMethod('debit')">
+                                    <i class="fas fa-money-check-alt mr-2"></i>Cartão de Débito
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Conteúdo PIX -->
+                        <div id="pixPayment" class="payment-content">
+                            <div class="text-center">
+                                <div class="mb-6">
+                                    <i class="fas fa-qrcode text-6xl text-[#e94560] mb-4"></i>
+                                    <h3 class="text-xl font-bold text-white mb-2">Pagamento via PIX</h3>
+                                    <p class="text-gray-400">Instantâneo, seguro e sem taxas</p>
+                                </div>
+                                
+                                <button id="generatePixBtn" class="bg-[#e94560] text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-[#c73a50] transition duration-300 shadow-lg w-full mb-4">
+                                    <i class="fas fa-qrcode mr-3"></i>Gerar QR Code PIX
+                                </button>
+                                
+                                <!-- Container do QR Code -->
+                                <div id="qrCodeContainer" class="hidden">
+                                    <div class="bg-white p-6 rounded-xl inline-block mb-4">
+                                        <canvas id="qrCanvas" width="200" height="200"></canvas>
+                                    </div>
+                                    <p class="text-gray-400 mb-4">Escaneie o código com seu celular</p>
+                                    <div class="bg-[#0f3460] p-4 rounded-lg">
+                                        <p class="text-sm text-gray-400 mb-2">Chave PIX (Copia e Cola):</p>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="text" id="pixKey" class="flex-1 bg-[#1a1a2e] text-white px-3 py-2 rounded text-sm" readonly>
+                                            <button onclick="copyPixKey()" class="bg-[#e94560] text-white px-3 py-2 rounded text-sm hover:bg-[#c73a50] transition duration-200">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conteúdo Cartão de Crédito -->
+                        <div id="creditPayment" class="payment-content hidden">
+                            <form id="creditForm">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Número do Cartão</label>
+                                        <input type="text" id="cardNumber" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="0000 0000 0000 0000" maxlength="19">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-white font-semibold mb-2">Validade</label>
+                                            <input type="text" id="cardExpiry" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="MM/AA" maxlength="5">
+                                        </div>
+                                        <div>
+                                            <label class="block text-white font-semibold mb-2">CVV</label>
+                                            <input type="text" id="cardCvv" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="123" maxlength="4">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Nome no Cartão</label>
+                                        <input type="text" id="cardName" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="Nome como aparece no cartão">
+                                    </div>
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Parcelas</label>
+                                        <select id="installments" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none">
+                                            <option value="1">1x sem juros</option>
+                                            <option value="2">2x sem juros</option>
+                                            <option value="3">3x sem juros</option>
+                                            <option value="6">6x com juros (2% a.m.)</option>
+                                            <option value="12">12x com juros (3% a.m.)</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="w-full bg-[#e94560] text-white px-6 py-4 rounded-xl text-lg font-semibold hover:bg-[#c73a50] transition duration-300 shadow-lg">
+                                        <i class="fas fa-credit-card mr-3"></i>Pagar com Cartão de Crédito
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Conteúdo Cartão de Débito -->
+                        <div id="debitPayment" class="payment-content hidden">
+                            <form id="debitForm">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Número do Cartão</label>
+                                        <input type="text" id="debitCardNumber" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="0000 0000 0000 0000" maxlength="19">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-white font-semibold mb-2">Validade</label>
+                                            <input type="text" id="debitCardExpiry" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="MM/AA" maxlength="5">
+                                        </div>
+                                        <div>
+                                            <label class="block text-white font-semibold mb-2">CVV</label>
+                                            <input type="text" id="debitCardCvv" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="123" maxlength="4">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-white font-semibold mb-2">Nome no Cartão</label>
+                                        <input type="text" id="debitCardName" class="w-full bg-[#0f3460] text-white px-4 py-3 rounded-lg border border-gray-600 focus:border-[#e94560] focus:outline-none" placeholder="Nome como aparece no cartão">
+                                    </div>
+                                    <button type="submit" class="w-full bg-[#e94560] text-white px-6 py-4 rounded-xl text-lg font-semibold hover:bg-[#c73a50] transition duration-300 shadow-lg">
+                                        <i class="fas fa-money-check-alt mr-3"></i>Pagar com Cartão de Débito
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Mensagem de carrinho vazio -->
+                        <div id="emptyCartMessage" class="text-center text-gray-400 hidden">
+                            <i class="fas fa-shopping-cart text-6xl mb-4 opacity-50"></i>
+                            <h3 class="text-2xl font-semibold mb-4">Carrinho Vazio</h3>
+                            <p class="text-lg mb-6">Adicione alguns jogos ao seu carrinho para continuar</p>
+                            <a href="index.html" class="bg-[#e94560] text-white px-8 py-4 rounded-xl hover:bg-[#c73a50] transition duration-300 inline-block text-lg font-semibold">
+                                <i class="fas fa-gamepad mr-2"></i>Ver Jogos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações de segurança -->
+                <div class="mt-12 bg-[#16213e] rounded-2xl p-8 shadow-2xl">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center">
+                        <i class="fas fa-shield-alt mr-3 text-green-400"></i>Compra 100% Segura
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <i class="fas fa-lock text-3xl text-green-400 mb-3"></i>
+                            <h4 class="font-semibold text-white mb-2">SSL Criptografado</h4>
+                            <p class="text-gray-400 text-sm">Seus dados protegidos com certificado SSL</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-undo text-3xl text-blue-400 mb-3"></i>
+                            <h4 class="font-semibold text-white mb-2">Política de Reembolso</h4>
+                            <p class="text-gray-400 text-sm">7 dias para solicitar reembolso</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-headset text-3xl text-[#e94560] mb-3"></i>
+                            <h4 class="font-semibold text-white mb-2">Suporte 24/7</h4>
+                            <p class="text-gray-400 text-sm">Atendimento sempre disponível</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Container -->
+        <div id="toastContainer" class="fixed top-6 right-6 z-50 space-y-2"></div>
+
+        <!-- Modal de processamento -->
+        <div id="processingModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+            <div class="bg-[#16213e] rounded-2xl p-8 max-w-md mx-4 text-center">
+                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#e94560] mx-auto mb-6"></div>
+                <h3 class="text-2xl font-bold text-white mb-4">Processando Pagamento</h3>
+                <p class="text-gray-400">Aguarde enquanto processamos sua transação...</p>
+            </div>
+        </div>
+
+        <!-- Modal de sucesso -->
+        <div id="successModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+            <div class="bg-[#16213e] rounded-2xl p-8 max-w-md mx-4 text-center">
+                <div class="text-green-400 text-6xl mb-6">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-4">Pagamento Aprovado!</h3>
+                <p class="text-gray-400 mb-6 text-lg">Obrigado pela sua compra! Seus jogos já estão disponíveis na sua biblioteca.</p>
+                <div class="flex gap-3">
+                    <button onclick="goToHome()" class="flex-1 bg-[#e94560] text-white px-6 py-3 rounded-xl hover:bg-[#c73a50] transition duration-300 font-semibold">
+                        <i class="fas fa-home mr-2"></i>Ir para Home
+                    </button>
+                    <button onclick="downloadReceipt()" class="flex-1 bg-gray-600 text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition duration-300 font-semibold">
+                        <i class="fas fa-download mr-2"></i>Baixar Recibo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#16213e] mt-20 py-12 border-t border-[#0f3460]">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="md:col-span-1">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-gamepad text-3xl text-[#e94560] mr-3"></i>
+                            <h3 class="text-xl font-bold text-white">GameZone Store</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Sua loja de jogos favorita. Descubra, compre e jogue os melhores títulos com os melhores preços do mercado.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Links Rápidos</h4>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li><a href="index.html" class="hover:text-[#e94560] transition duration-200">Home</a></li>
+                            <li><a href="assinatura.html" class="hover:text-[#e94560] transition duration-200">Assinaturas</a></li>
+                            <li><a href="#" class="hover:text-[#e94560] transition duration-200">Suporte</a></li>
+                            <li><a href="#" class="hover:text-[#e94560] transition duration-200">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Categorias</h4>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li><a href="#" class="hover:text-[#e94560] transition duration-200">Ação</a></li>
+                            <li><a href="#" class="hover:text-[#e94560] transition duration-200">Aventura</a></li>
+                            <li><a href="#" class="hover:text-[#e94560] transition duration-200">RPG</a></li>
+                            <li><a href="#" class="hover:text-[#e94560] transition duration-200">Esportes</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Siga-nos</h4>
+                        <div class="flex space-x-4 mb-4">
+                            <a href="#" class="text-gray-400 hover:text-[#e94560] text-2xl transition duration-200">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-[#e94560] text-2xl transition duration-200">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-[#e94560] text-2xl transition duration-200">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-[#e94560] text-2xl transition duration-200">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-[#0f3460] mt-8 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">© 2025 GameZone Store. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,335 @@
+/* === GameZone Store - CSS Consolidado e Otimizado === */
+
+/* Reset básico e configurações globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0f0f1a;
+  color: #e0e0e0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* Navegação consolidada */
+.navbar {
+  background-color: #16213e;
+  padding: 1rem 2rem;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #e94560 !important;
+}
+
+.navbar-nav .nav-link {
+  color: #e0e0e0 !important;
+  margin-left: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #e94560 !important;
+}
+
+/* Containers otimizados */
+.container-custom {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Cards unificados */
+.card-custom {
+  background: #16213e;
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem;
+  text-align: center;
+  color: #e0e0e0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-custom:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(233, 69, 96, 0.2);
+}
+
+.card-custom h2 {
+  color: #e94560;
+  margin-bottom: 1rem;
+}
+
+/* Botões padronizados */
+.btn-custom {
+  background: linear-gradient(135deg, #e94560, #c73a50);
+  border: none;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-custom:hover {
+  background: linear-gradient(135deg, #c73a50, #a52a3a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+}
+
+/* Carrinho otimizado */
+#carrinho {
+  background: #16213e;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+#carrinho h3 {
+  color: #e94560;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+#itensCarrinho {
+  list-style: none;
+  padding: 0;
+}
+
+#itensCarrinho li {
+  padding: 8px 0;
+  border-bottom: 1px solid #0f3460;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#itensCarrinho li:last-child {
+  border-bottom: none;
+}
+
+/* Seção de pagamento melhorada */
+.payment-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #16213e;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.payment-section h2 {
+  margin-bottom: 1.5rem;
+  color: #e94560;
+  text-align: center;
+}
+
+/* Tabs de pagamento */
+.payment-tab {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.payment-tab.active {
+  color: #e94560;
+  border-bottom-color: #e94560;
+}
+
+.payment-tab:hover {
+  color: #e94560;
+}
+
+/* Formulários de pagamento */
+.payment-form input,
+.payment-form select {
+  width: 100%;
+  background: #0f3460;
+  color: #e0e0e0;
+  border: 2px solid #374151;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.payment-form input:focus,
+.payment-form select:focus {
+  outline: none;
+  border-color: #e94560;
+  box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+}
+
+.payment-form input.error {
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.payment-form .error-message {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* QR Code container */
+#qrCodeContainer {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#qrCodeContainer canvas {
+  margin: 1rem auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.pix-info {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* Modais melhorados */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  margin: 1rem;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 60;
+  max-width: 400px;
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast.success {
+  background: #10b981;
+}
+.toast.error {
+  background: #ef4444;
+}
+.toast.warning {
+  background: #f59e0b;
+}
+.toast.info {
+  background: #3b82f6;
+}
+
+/* Footer consolidado */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  background: #16213e;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  border-top: 1px solid #0f3460;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container-custom {
+    padding: 0.5rem;
+  }
+
+  .card-custom {
+    margin: 0.5rem;
+  }
+
+  .payment-section {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .modal-content {
+    margin: 0.5rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Animações e transições */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Estados de loading */
+.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #e94560;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone Store - Sua Loja de Jogos Favorita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+    <style>
+        /* Melhorias visuais */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 100%);
+        }
+        
+        .content-wrapper {
+            flex: 1;
+        }
+        
+        /* Hero section gradient aprimorado */
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0 20L100 0v20z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100px 20px;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(30px); }
+        }
+        
+        /* Efeitos visuais para o footer */
+        .footer-gradient {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #e94560, #c73a50);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .social-icon:hover::before {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e94560, #c73a50);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover::after {
+            width: 100%;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Melhorias nos cards de jogos */
+        .game-card {
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .game-card:hover {
+            border-color: rgba(233, 69, 96, 0.5);
+            box-shadow: 0 25px 50px rgba(233, 69, 96, 0.2);
+        }
+        
+        /* Loading animation melhorado */
+        .loading-dots {
+            display: inline-block;
+            animation: loading-dots 1.4s infinite;
+        }
+        
+        @keyframes loading-dots {
+            0%, 80%, 100% { opacity: 0; }
+            40% { opacity: 1; }
+        }
+        
+        /* Notificação promocional */
+        .promo-notification {
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+       /* Search input melhorado */
+.search-container input {
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(15, 52, 96, 0.85);
+    box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.search-container input:focus {
+    border-color: rgba(233, 69, 96, 0.6);
+    box-shadow: 0 0 30px rgba(233, 69, 96, 0.4), inset 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(15, 52, 96, 0.95);
+}
+
+/* Ícone de pesquisa com animação */
+.search-icon {
+    transition: all 0.3s ease;
+}
+
+.search-container:focus-within .search-icon {
+    color: #e94560;
+    transform: scale(1.1);
+}
+    </style>
+</head>
+<body class="bg-gradient-to-br from-[#0f0c29] to-[#1a1a2e] text-[#e0e0e0] font-sans">
+    <div class="content-wrapper">
+        <!-- Navegação Melhorada -->
+        <nav class="bg-[#16213e]/90 backdrop-blur-md p-4 shadow-2xl sticky top-0 z-40 border-b border-white/10">
+            <div class="container mx-auto flex justify-between items-center">
+                <a class="text-white text-2xl font-bold flex items-center hover:text-[#e94560] transition duration-300" href="index.html">
+                    <div class="w-10 h-10 bg-gradient-to-r from-[#e94560] to-[#c73a50] rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                        <i class="fas fa-gamepad text-white text-lg"></i>
+                    </div>
+                    GameZone Store
+                </a>
+                <div class="flex items-center space-x-4">
+                    <a class="bg-gradient-to-r from-[#e94560] to-[#c73a50] text-white px-6 py-2 rounded-full hover:shadow-lg transition duration-300 flex items-center font-medium" href="index.html">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a class="bg-gradient-to-r from-[#0f3460] to-[#23395d] text-white px-6 py-2 rounded-full hover:shadow-lg transition duration-300 flex items-center font-medium" href="assinatura.html">
+                        <i class="fas fa-star mr-2"></i>Assinatura
+                    </a>
+                     <a class="bg-gradient-to-r from-[#0f3460] to-[#23395d] text-white px-6 py-2 rounded-full hover:shadow-lg transition duration-300 flex items-center font-medium" href="sobre.html">
+                    <i class="fas fa-info-circle mr-2"></i>Sobre
+                    </a>
+                    <button class="relative bg-gradient-to-r from-[#e94560] to-[#c73a50] text-white px-6 py-2 rounded-full hover:shadow-lg transition duration-300 flex items-center justify-center font-medium" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart text-lg"></i>
+                        <span class="cart-badge absolute -top-2 -right-2 bg-white text-[#e94560] rounded-full text-xs w-6 h-6 flex items-center justify-center font-bold shadow-md" id="cartCount" style="display: none;">0</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section Melhorado -->
+        <section class="hero-gradient py-16 px-4 relative">
+            <div class="container mx-auto text-center relative z-10">
+                <h1 class="text-6xl font-bold text-white mb-6 leading-tight">
+                    Bem-vindo à <span class="text-[#e94560] bg-gradient-to-r from-[#e94560] to-[#c73a50] bg-clip-text text-transparent">GameZone Store</span>
+                </h1>
+                <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                    Descubra os melhores jogos com os melhores preços! Milhares de títulos esperando por você.
+                </p>
+                <div class="flex justify-center mb-8">
+                    <div class="search-container relative w-full max-w-3xl">
+                        <i class="fas fa-search absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
+                        <input type="text" class="w-full pl-16 pr-6 py-5 rounded-2xl bg-[#0f3460]/80 text-[#e0e0e0] border-2 border-transparent focus:border-[#e94560] focus:outline-none shadow-xl text-lg placeholder-gray-400" id="searchInput" placeholder="Buscar seus jogos favoritos..." onkeyup="filterGames()">
+                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conteúdo Principal -->
+        <section class="py-8 px-4 md:px-8 lg:px-16">
+            <div class="container mx-auto">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Sidebar de Filtros Melhorado -->
+                    <div class="lg:w-1/4">
+                        <div class="bg-[#16213e]/80 backdrop-blur-md p-6 rounded-2xl shadow-2xl sticky top-24 border border-white/10">
+                            <div class="text-2xl font-bold text-[#e94560] mb-6 flex items-center">
+                                <i class="fas fa-filter mr-3"></i>Filtros
+                            </div>
+                            
+                            <!-- Ordenação -->
+                            <div class="mb-6">
+                                <h6 class="text-lg font-semibold mb-4 text-white flex items-center">
+                                    <i class="fas fa-sort mr-2 text-[#e94560]"></i>Ordenar por
+                                </h6>
+                                <select id="sortSelect" class="w-full bg-[#0f3460] text-white p-3 rounded-xl border border-white/10 focus:border-[#e94560] focus:outline-none" onchange="sortGames(this.value)">
+                                    <option value="">Selecione</option>
+                                    <option value="name">Nome (A-Z)</option>
+                                    <option value="price-low">Menor Preço</option>
+                                    <option value="price-high">Maior Preço</option>
+                                    <option value="rating">Melhor Avaliação</option>
+                                    <option value="newest">Mais Recentes</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h6 class="text-lg font-semibold mb-4 text-white flex items-center">
+                                    <i class="fas fa-tags mr-2 text-[#e94560]"></i>Gêneros
+                                </h6>
+                                <div class="space-y-3" id="genreFilters">
+                                    <label class="flex items-center cursor-pointer hover:text-[#e94560] transition duration-200 p-2 rounded-lg hover:bg-white/5">
+                                        <input type="checkbox" value="Action" onchange="filterGames()" class="mr-3 w-4 h-4 accent-[#e94560] rounded">
+                                        <i class="fas fa-fist-raised mr-2 text-[#e94560]"></i>
+                                        <span>Ação</span>
+                                    </label>
+                                    <label class="flex items-center cursor-pointer hover:text-[#e94560] transition duration-200 p-2 rounded-lg hover:bg-white/5">
+                                        <input type="checkbox" value="Adventure" onchange="filterGames()" class="mr-3 w-4 h-4 accent-[#e94560] rounded">
+                                        <i class="fas fa-compass mr-2 text-[#e94560]"></i>
+                                        <span>Aventura</span>
+                                    </label>
+                                    <label class="flex items-center cursor-pointer hover:text-[#e94560] transition duration-200 p-2 rounded-lg hover:bg-white/5">
+                                        <input type="checkbox" value="RPG" onchange="filterGames()" class="mr-3 w-4 h-4 accent-[#e94560] rounded">
+                                        <i class="fas fa-dragon mr-2 text-[#e94560]"></i>
+                                        <span>RPG</span>
+                                    </label>
+                                    <label class="flex items-center cursor-pointer hover:text-[#e94560] transition duration-200 p-2 rounded-lg hover:bg-white/5">
+                                        <input type="checkbox" value="Shooter" onchange="filterGames()" class="mr-3 w-4 h-4 accent-[#e94560] rounded">
+                                        <i class="fas fa-crosshairs mr-2 text-[#e94560]"></i>
+                                        <span>Tiro</span>
+                                    </label>
+                                    <label class="flex items-center cursor-pointer hover:text-[#e94560] transition duration-200 p-2 rounded-lg hover:bg-white/5">
+                                        <input type="checkbox" value="Strategy" onchange="filterGames()" class="mr-3 w-4 h-4 accent-[#e94560] rounded">
+                                        <i class="fas fa-chess mr-2 text-[#e94560]"></i>
+                                        <span>Estratégia</span>
+                                    </label>
+                                    <label class="flex items-center cursor-pointer hover:text-[#e94560] transition duration-200 p-2 rounded-lg hover:bg-white/5">
+                                        <input type="checkbox" value="Sports" onchange="filterGames()" class="mr-3 w-4 h-4 accent-[#e94560] rounded">
+                                        <i class="fas fa-running mr-2 text-[#e94560]"></i>
+                                        <span>Esportes</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button class="w-full bg-gradient-to-r from-gray-600 to-gray-500 text-white py-3 rounded-xl hover:from-gray-500 hover:to-gray-400 transition duration-300 shadow-lg font-medium" onclick="clearFilters()">
+                                <i class="fas fa-eraser mr-2"></i>Limpar Filtros
+                            </button>
+                        </div>
+                    </div>
+
+                    
+
+                    <!-- Catálogo de Jogos -->
+                    <div class="lg:w-3/4">
+                        <div class="flex justify-between items-center mb-8">
+                            <h2 class="text-4xl font-bold text-white">Catálogo de Jogos</h2>
+                            <div class="flex items-center space-x-4">
+                                <span id="gameCount" class="text-white text-lg font-medium bg-[#16213e]/80 backdrop-blur-md px-6 py-3 rounded-full shadow-lg border border-white/10">0 jogos encontrados</span>
+                            </div>
+                        </div>
+
+                        <!-- Loading melhorado -->
+                        <div class="loading justify-center items-center h-40 hidden" id="loading">
+                            <div class="relative">
+                                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#e94560]"></div>
+                                <div class="absolute inset-0 animate-ping rounded-full h-16 w-16 border-2 border-[#e94560] opacity-20"></div>
+                            </div>
+                            <span class="ml-4 text-xl font-medium">
+                                Carregando jogos incríveis<span class="loading-dots">...</span>
+                            </span>
+                        </div>
+
+                        <!-- Container dos Jogos -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="gamesContainer">
+                            <!-- Jogos serão carregados aqui -->
+                        </div>
+
+                        <!-- Botão Carregar Mais -->
+                        <div class="flex justify-center mt-12">
+                            <button class="bg-gradient-to-r from-[#e94560] to-[#c73a50] text-white px-8 py-4 rounded-2xl hover:shadow-xl transition duration-300 text-lg font-semibold transform hover:scale-105" onclick="loadMoreGames()" id="loadMoreBtn">
+                                <i class="fas fa-plus-circle mr-3"></i>Descobrir Mais Jogos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carrinho Lateral Melhorado -->
+        <div class="fixed right-0 top-0 h-full w-96 bg-[#16213e]/95 backdrop-blur-md shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col z-50 border-l border-white/10" id="cartSidebar">
+            <div class="flex justify-between items-center p-6 bg-[#1a1a2e]/80 text-white border-b border-[#0f3460]">
+                <h3 class="text-2xl font-bold flex items-center">
+                    <i class="fas fa-shopping-cart mr-3 text-[#e94560]"></i>Meu Carrinho
+                </h3>
+                <button class="text-white hover:text-[#e94560] text-2xl transition duration-200" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex-grow p-6 overflow-y-auto" id="cartBody">
+                <div class="text-center text-gray-400 py-16">
+                    <i class="fas fa-shopping-cart text-6xl mb-4 opacity-30"></i>
+                    <p class="text-lg">Seu carrinho está vazio</p>
+                    <p class="text-sm mt-2">Adicione alguns jogos incríveis!</p>
+                </div>
+            </div>
+            
+            <div class="p-6 bg-[#1a1a2e]/80 border-t border-[#0f3460]">
+                <div class="flex justify-between items-center text-2xl font-bold mb-6">
+                    <span class="text-white">Total:</span>
+                    <span class="text-[#e94560]">R$ <span id="cartTotal">0,00</span></span>
+                </div>
+                <button class="w-full bg-gradient-to-r from-[#e94560] to-[#c73a50] text-white py-4 rounded-2xl hover:shadow-xl transition duration-300 text-lg font-semibold flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed" onclick="goToPayment()" disabled id="checkoutBtn">
+                    <i class="fas fa-credit-card mr-3"></i>Finalizar Compra
+                </button>
+            </div>
+        </div>
+        <!-- Overlay do Carrinho -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" id="cartOverlay" onclick="toggleCart()"></div>
+
+        <!-- Botão Flutuante -->
+        <button id="floatingCheckoutBtn" class="fixed bottom-6 right-6 bg-gradient-to-r from-[#e94560] to-[#c73a50] text-white px-6 py-4 rounded-full shadow-2xl hover:shadow-xl transition duration-300 text-lg font-bold flex items-center space-x-3 z-30 hidden transform hover:scale-110" onclick="goToPayment()">
+            <i class="fas fa-credit-card text-xl"></i>
+            <div class="flex flex-col items-start">
+                <span class="text-xs opacity-80">Finalizar</span>
+                <span>R$ <span id="floatingCheckoutTotal">0,00</span></span>
+            </div>
+        </button>
+
+        <!-- Toast Container -->
+        <div id="toastContainer" class="fixed top-6 right-6 z-50 space-y-2"></div>
+        
+       
+    </div>
+</section>
+    <!-- Footer Melhorado (mantido igual ao original mas com pequenos ajustes) -->
+    <footer class="footer-gradient border-t-2 border-[#e94560] relative overflow-hidden">
+        <!-- Efeito de fundo animado -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-[#e94560] rounded-full pulse-animation"></div>
+            <div class="absolute top-20 right-20 w-16 h-16 bg-[#c73a50] rounded-full pulse-animation" style="animation-delay: 0.5s;"></div>
+            <div class="absolute bottom-10 left-1/3 w-12 h-12 bg-[#e94560] rounded-full pulse-animation" style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="container mx-auto px-4 py-16 relative z-10">
+            <!-- Newsletter Section -->
+            <div class="text-center mb-16">
+                <div class="bg-[#1a1a2e]/80 backdrop-blur-md rounded-3xl p-8 shadow-2xl max-w-2xl mx-auto border border-white/10">
+                    <h3 class="text-2xl font-bold text-white mb-4 flex items-center justify-center">
+                        <i class="fas fa-envelope mr-3 text-[#e94560]"></i>
+                        Fique por dentro das novidades!
+                    </h3>
+                    <p class="text-gray-400 mb-6">Receba promoções exclusivas e lançamentos em primeira mão</p>
+                    <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                        <input type="email" placeholder="Seu melhor e-mail" 
+                               class="flex-1 px-4 py-3 rounded-xl bg-[#0f3460] text-white border-2 border-transparent focus:border-[#e94560] focus:outline-none transition duration-300">
+                        <button class="bg-gradient-to-r from-[#e94560] to-[#c73a50] text-white px-6 py-3 rounded-xl hover:shadow-lg transition duration-300 font-semibold transform hover:scale-105">
+                            <i class="fas fa-paper-plane mr-2"></i>Inscrever
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Footer Content (mantido igual) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Logo e Descrição -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-[#e94560] to-[#c73a50] rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                            <i class="fas fa-gamepad text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">GameZone Store</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Sua loja de jogos favorita. Descubra, compre e jogue os melhores títulos com os melhores preços do mercado.
+                    </p>
+                    
+                    <!-- Estatísticas -->
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-[#1a1a2e] p-3 rounded-xl border border-[#0f3460]">
+                            <div class="text-[#e94560] font-bold text-lg">500+</div>
+                            <div class="text-gray-400 text-xs">Jogos</div>
+                        </div>
+                        <div class="bg-[#1a1a2e] p-3 rounded-xl border border-[#0f3460]">
+                            <div class="text-[#e94560] font-bold text-lg">10k+</div>
+                            <div class="text-gray-400 text-xs">Clientes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-lg flex items-center">
+                        <i class="fas fa-link mr-2 text-[#e94560]"></i>Links Rápidos
+                    </h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="footer-link text-gray-400 text-sm hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-home mr-2 text-[#e94560] w-4"></i>Home
+                        </a></li>
+                        <li><a href="assinatura.html" class="footer-link text-gray-400 text-sm hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-star mr-2 text-[#e94560] w-4"></i>Assinaturas
+                        </a></li>
+                        <li><a href="sobre.html" class="footer-link text-gray-400 text-sm hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-info-circle mr-2 text-[#e94560] w-4"></i>Sobre Nós
+                        </a></li>
+                    </ul>
+                </div>
+
+                <!-- Categorias -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-lg flex items-center">
+                        <i class="fas fa-th-large mr-2 text-[#e94560]"></i>Categorias
+                    </h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-400 text-sm hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-fist-raised mr-2 text-[#e94560] w-4"></i>Ação
+                        </a></li>
+                        <li><a href="#" class="footer-link text-gray-400 text-sm hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-compass mr-2 text-[#e94560] w-4"></i>Aventura
+                        </a></li>
+                        <li><a href="#" class="footer-link text-gray-400 text-sm hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-dragon mr-2 text-[#e94560] w-4"></i>RPG
+                        </a></li>
+                        <li><a href="#" class="footer-link text-gray-400 text-sm hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-running mr-2 text-[#e94560] w-4"></i>Esportes
+                        </a></li>
+                        <li><a href="#" class="footer-link text-gray-400 text-sm hover:text-white transition duration-200 flex items-center">
+                            <i class="fas fa-chess mr-2 text-[#e94560] w-4"></i>Estratégia
+                        </a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato e Redes Sociais -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-lg flex items-center">
+                        <i class="fas fa-users mr-2 text-[#e94560]"></i>Conecte-se
+                    </h4>
+                    
+                    <!-- Redes Sociais -->
+                    <div class="flex space-x-3 mb-6">
+                        <a href="#" class="social-icon w-10 h-10 bg-[#1a1a2e] rounded-full flex items-center justify-center text-gray-400 hover:text-white transition duration-200 border border-[#0f3460]">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-[#1a1a2e] rounded-full flex items-center justify-center text-gray-400 hover:text-white transition duration-200 border border-[#0f3460]">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-[#1a1a2e] rounded-full flex items-center justify-center text-gray-400 hover:text-white transition duration-200 border border-[#0f3460]">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-[#1a1a2e] rounded-full flex items-center justify-center text-gray-400 hover:text-white transition duration-200 border border-[#0f3460]">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 bg-[#1a1a2e] rounded-full flex items-center justify-center text-gray-400 hover:text-white transition duration-200 border border-[#0f3460]">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+
+                    <!-- Informações de Contato -->
+                    <div class="space-y-3 text-gray-400 text-sm">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-[#e94560] w-4"></i>
+                            <span>contato@gamezone.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-[#e94560] w-4"></i>
+                            <span>(51) 3026-8922</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-[#e94560] w-4"></i>
+                            <span>Seg-Dom: 24h</span>
+                        </div>
+                    </div>
+
+                    <!-- App Download -->
+                    <div class="mt-6">
+                        <p class="text-white font-semibold mb-3 text-sm">Baixe nosso app:</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="#" class="bg-[#1a1a2e] border border-[#0f3460] rounded-lg p-2 hover:bg-[#0f3460] transition duration-200 flex items-center">
+                                <i class="fab fa-google-play text-[#e94560] text-xl mr-3"></i>
+                                <div>
+                                    <div class="text-xs text-gray-400">Baixar na</div>
+                                    <div class="text-sm text-white font-semibold">Google Play</div>
+                                </div>
+                            </a>
+                            <a href="#" class="bg-[#1a1a2e] border border-[#0f3460] rounded-lg p-2 hover:bg-[#0f3460] transition duration-200 flex items-center">
+                                <i class="fab fa-apple text-[#e94560] text-xl mr-3"></i>
+                                <div>
+                                    <div class="text-xs text-gray-400">Baixar na</div>
+                                    <div class="text-sm text-white font-semibold">App Store</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Separador -->
+            <div class="border-t border-[#0f3460] pt-8">
+                <!-- Métodos de Pagamento -->
+                <div class="text-center mb-8">
+                    <h5 class="text-white font-semibold mb-4 flex items-center justify-center">
+                        <i class="fas fa-credit-card mr-2 text-[#e94560]"></i>
+                        Formas de Pagamento Aceitas
+                    </h5>
+                    <div class="flex justify-center space-x-4 flex-wrap gap-2">
+                        <div class="bg-[#1a1a2e] p-2 rounded-lg border border-[#0f3460] hover:border-[#e94560] transition duration-200">
+                            <i class="fab fa-cc-visa text-2xl text-blue-500"></i>
+                        </div>
+                        <div class="bg-[#1a1a2e] p-2 rounded-lg border border-[#0f3460] hover:border-[#e94560] transition duration-200">
+                            <i class="fab fa-cc-mastercard text-2xl text-red-500"></i>
+                        </div>
+                        <div class="bg-[#1a1a2e] p-2 rounded-lg border border-[#0f3460] hover:border-[#e94560] transition duration-200">
+                            <i class="fab fa-cc-paypal text-2xl text-blue-400"></i>
+                        </div>
+                        <div class="bg-[#1a1a2e] p-2 rounded-lg border border-[#0f3460] hover:border-[#e94560] transition duration-200">
+                            <i class="fas fa-university text-2xl text-green-500"></i>
+                        </div>
+                        <div class="bg-[#1a1a2e] p-2 rounded-lg border border-[#0f3460] hover:border-[#e94560] transition duration-200">
+                            <span class="text-yellow-500 font-bold text-lg">PIX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Copyright e Links Legais -->
+                <div class="flex flex-col lg:flex-row justify-between items-center text-center lg:text-left">
+                    <div class="mb-4 lg:mb-0">
+                        <p class="text-gray-400 text-sm flex items-center justify-center lg:justify-start">
+                            <i class="fas fa-copyright mr-2 text-[#e94560]"></i>
+                            2025 GameZone Store. Todos os direitos reservados.
+                        </p>
+                        <p class="text-gray-500 text-xs mt-1">
+                            Desenvolvido com <i class="fas fa-heart text-[#e94560]"></i> para gamers
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center lg:justify-end space-x-6 text-gray-400 text-sm">
+                        <a href="#" class="footer-link hover:text-white transition duration-200">Termos de Uso</a>
+                        <a href="#" class="footer-link hover:text-white transition duration-200">Privacidade</a>
+                        <a href="#" class="footer-link hover:text-white transition duration-200">Cookies</a>
+                        <a href="#" class="footer-link hover:text-white transition duration-200">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão "Voltar ao Topo" -->
+    <button onclick="scrollToTop()" class="fixed bottom-6 left-6 bg-gradient-to-r from-[#e94560] to-[#c73a50] text-white p-3 rounded-full shadow-2xl hover:shadow-xl transition duration-300 transform hover:scale-110 z-50" id="backToTop" style="display: none;">
+        <i class="fas fa-arrow-up text-lg"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        // Função para voltar ao topo
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mostrar/ocultar botão "Voltar ao topo"
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // Newsletter subscription (simulado)
+        const newsletterBtn = document.querySelector('button[onclick*="Inscrever"]') || 
+                             document.querySelector('footer button:contains("Inscrever")');
+        if (newsletterBtn) {
+            newsletterBtn.addEventListener('click', function() {
+                const emailInput = document.querySelector('footer input[type="email"]');
+                const email = emailInput ? emailInput.value : '';
+                if (email && email.includes('@')) {
+                    alert('Obrigado por se inscrever! Você receberá nossas novidades em breve.');
+                    if (emailInput) emailInput.value = '';
+                } else {
+                    alert('Por favor, digite um e-mail válido.');
+                }
+            });
+        }
+
+        // Animação suave para links âncora
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+    </script>
+</body>
+</html>
